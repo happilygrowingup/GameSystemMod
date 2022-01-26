@@ -6,9 +6,12 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.widget.Slider;
 import org.jetbrains.annotations.NotNull;
 
+@OnlyIn(Dist.CLIENT)
 public class GUISelectAttribute extends Screen {
     private int speed;
     private int health;
@@ -35,14 +38,14 @@ public class GUISelectAttribute extends Screen {
     protected void init() {
         assert minecraft != null;
         minecraft.keyboardHandler.setSendRepeatsToGui(true);
-        Bspeed = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {speed += 10;points-=10;});
-        Bhealth = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {health += 10;points-=10;});
-        Bstrength = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {strength += 10;points-=10;});
-        Bdefence = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {defence += 10;points-=10;});
-        Bmental = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {mental += 10;points-=10;});
-        BIQ = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {IQ += 10;points-=10;});
-        Bknowledge = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {knowledge += 10;points-=10;});
-        Bsurgical = new Button(width/2,10,10,10,new TextComponent("+"),(button) -> {surgical += 10;points-=10;});
+        Bspeed = new Button(width/2,30,10,10,new TextComponent("+"),(button) -> {speed += 10;points-=10;});
+        Bhealth = new Button(width/2,40,10,10,new TextComponent("+"),(button) -> {health += 10;points-=10;});
+        Bstrength = new Button(width/2,50,10,10,new TextComponent("+"),(button) -> {strength += 10;points-=10;});
+        Bdefence = new Button(width/2,60,10,10,new TextComponent("+"),(button) -> {defence += 10;points-=10;});
+        Bmental = new Button(width/2,70,10,10,new TextComponent("+"),(button) -> {mental += 10;points-=10;});
+        BIQ = new Button(width/2,80,10,10,new TextComponent("+"),(button) -> {IQ += 10;points-=10;});
+        Bknowledge = new Button(width/2,90,10,10,new TextComponent("+"),(button) -> {knowledge += 10;points-=10;});
+        Bsurgical = new Button(width/2,100,10,10,new TextComponent("+"),(button) -> {surgical += 10;points-=10;});
 
         super.init();
     }
@@ -51,14 +54,14 @@ public class GUISelectAttribute extends Screen {
     public void render(@NotNull PoseStack p_96562_, int p_96563_, int p_96564_, float p_96565_) {
         this.renderBackground(p_96562_);
         drawString(p_96562_,this.font,"You have " + points + " points left.",width/2 -20,0,0xFFFFFF);
-        drawString(p_96562_,this.font,"speed:" + speed,width/2 -20,30,0xFFFFFF);
-        drawString(p_96562_,this.font,"health:" + health,width/2 -20,40,0xFFFFFF);
-        drawString(p_96562_,this.font,"strength:" + strength,width/2 -20,50,0xFFFFFF);
-        drawString(p_96562_,this.font,"defence:" + defence,width/2 -20,60,0xFFFFFF);
-        drawString(p_96562_,this.font,"mental:" + mental,width/2 -20,70,0xFFFFFF);
-        drawString(p_96562_,this.font,"IQ:" + IQ,width/2 -20,80,0xFFFFFF);
-        drawString(p_96562_,this.font,"knowledge:" + knowledge,width/2 -20,90,0xFFFFFF);
-        drawString(p_96562_,this.font,"Surgical:" + surgical,width/2 -20,100,0xFFFFFF);
+        drawString(p_96562_,this.font,"speed:" + speed,width/2 + 20,30,0xFFFFFF);
+        drawString(p_96562_,this.font,"health:" + health,width/2 + 20,40,0xFFFFFF);
+        drawString(p_96562_,this.font,"strength:" + strength,width/2 + 20,50,0xFFFFFF);
+        drawString(p_96562_,this.font,"defence:" + defence,width/2 + 20,60,0xFFFFFF);
+        drawString(p_96562_,this.font,"mental:" + mental,width/2 + 20,70,0xFFFFFF);
+        drawString(p_96562_,this.font,"IQ:" + IQ,width/2 + 20,80,0xFFFFFF);
+        drawString(p_96562_,this.font,"knowledge:" + knowledge,width/2 + 20,90,0xFFFFFF);
+        drawString(p_96562_,this.font,"Surgical:" + surgical,width/2 + 20,100,0xFFFFFF);
         Bspeed.render(p_96562_,p_96563_,p_96564_,p_96565_);
         Bhealth.render(p_96562_,p_96563_,p_96564_,p_96565_);
         Bstrength.render(p_96562_,p_96563_,p_96564_,p_96565_);

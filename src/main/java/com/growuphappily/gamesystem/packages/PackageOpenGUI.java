@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketDecoder;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Arrays;
@@ -14,7 +16,7 @@ public class PackageOpenGUI {
     private String message;
 
     public PackageOpenGUI(FriendlyByteBuf buf){
-        message = Arrays.toString(buf.readByteArray());
+        //message = Arrays.toString(buf.readByteArray(buf.readableBytes()));
     }
 
     public PackageOpenGUI(String message){
@@ -29,7 +31,7 @@ public class PackageOpenGUI {
         ctx.get().enqueueWork(PackageOpenGUI::execute);
         ctx.get().setPacketHandled(true);
     }
-
+    @OnlyIn(Dist.CLIENT)
     public static void execute(){
         //Code for open client gui
         Minecraft.getInstance().setScreen(new GUISelectAttribute(new TextComponent("Title")));
