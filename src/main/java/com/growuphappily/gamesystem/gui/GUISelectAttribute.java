@@ -1,6 +1,7 @@
 package com.growuphappily.gamesystem.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -41,7 +42,6 @@ public class GUISelectAttribute extends Screen {
         assert minecraft != null;
         minecraft.keyboardHandler.setSendRepeatsToGui(true);
         Bspeed = new Button(width / 2, 30, 10, 10, new TextComponent("+"), (button) -> {
-            logger.info("Clicked!");
             speed += 10;
             points -= 10;
         });
@@ -105,5 +105,12 @@ public class GUISelectAttribute extends Screen {
         Bknowledge.render(p_96562_, p_96563_, p_96564_, p_96565_);
         Bsurgical.render(p_96562_, p_96563_, p_96564_, p_96565_);
         super.render(p_96562_, p_96563_, p_96564_, p_96565_);
+        if(points == 0){
+            endSelecting();
+        }
+    }
+
+    public void endSelecting(){
+        Minecraft.getInstance().setScreen(null);
     }
 }
