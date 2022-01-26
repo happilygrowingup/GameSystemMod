@@ -1,6 +1,7 @@
 package com.growuphappily.gamesystem.system;
 
 import com.growuphappily.gamesystem.enums.EnumGameMode;
+import net.minecraft.server.MinecraftServer;
 
 public class Game extends Thread{
     public EnumGameMode gameMode;
@@ -11,5 +12,4 @@ public class Game extends Thread{
         this.players = players;
         instance = this;
     }
-
 }
