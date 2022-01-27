@@ -27,5 +27,12 @@ public class Networking {
                 PackageOpenGUI::new,
                 PackageOpenGUI::handler
         );
+        INSTANCE.registerMessage(
+                ID(),
+                PackageAttribute.class,
+                PackageAttribute::toBytes,
+                PackageAttribute::new,
+                PackageAttribute::handler
+        );
     }
 }

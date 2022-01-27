@@ -1,5 +1,7 @@
 package com.growuphappily.gamesystem.gui;
 
+import com.growuphappily.gamesystem.packages.Networking;
+import com.growuphappily.gamesystem.packages.PackageAttribute;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -112,5 +114,16 @@ public class GUISelectAttribute extends Screen {
 
     public void endSelecting(){
         Minecraft.getInstance().setScreen(null);
+        assert Minecraft.getInstance().player != null;
+        Networking.INSTANCE.sendToServer(new PackageAttribute(
+                speed + "." +
+                health + "." +
+                strength + "." +
+                defence + "." +
+                mental + "." +
+                IQ + "." +
+                knowledge + "." +
+                surgical
+        ));
     }
 }

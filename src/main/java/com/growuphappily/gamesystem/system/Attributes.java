@@ -37,4 +37,15 @@ public class Attributes {
     public float getSurgicalRegenSpeed(){
         return (float) (1 + (mental * 0.02));
     }
+
+    public Attributes(int speed, int health, int strength, int defence, int mental, int IQ, int knowledge, int surgical){
+        this.speed = speed;
+        this.health = health;
+        this.strength = strength;
+        this.defence = defence;
+        this.mental = mental;
+        this.IQ = IQ;
+        this.knowledge = knowledge;
+        this.surgical = surgical;
+    }
 }

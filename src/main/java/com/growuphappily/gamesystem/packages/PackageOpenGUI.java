@@ -8,15 +8,21 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class PackageOpenGUI {
     private String message;
 
+    private Logger logger = LogManager.getLogger();
+
     public PackageOpenGUI(FriendlyByteBuf buf){
-        //message = Arrays.toString(buf.readByteArray(buf.readableBytes()));
+        message = buf.toString(Charset.defaultCharset());
+        logger.info("Recv:" + message);
     }
 
     public PackageOpenGUI(String message){

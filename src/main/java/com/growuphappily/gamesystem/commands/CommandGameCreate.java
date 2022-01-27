@@ -21,6 +21,8 @@ public class CommandGameCreate implements Command<CommandSourceStack> {
     public static CommandGameCreate instance = new CommandGameCreate();
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        Game.server = context.getSource().getServer();
+        new Game(EnumGameMode.MODE_NORMAL);
         context.getSource().sendSuccess(new TextComponent("Test"),false);
         for (ServerPlayer p:context.getSource().getServer().getPlayerList().getPlayers()) {
             Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> p), new PackageOpenGUI("OPEN"));
