@@ -38,8 +38,8 @@ public class Game extends Thread{
         for (ServerPlayer p : server.getPlayerList().getPlayers()) {
             players.add(new GamePlayer(p));
         }
-        evil = players.get(rand.nextInt(server.getPlayerCount()));
-        evil.isEvil = true;
+        // evil = players.get(rand.nextInt(server.getPlayerCount()));
+        // evil.isEvil = true;
         for (GamePlayer player : players) {
             if (!player.isEvil) {
                 humans.add(player);
@@ -86,7 +86,7 @@ public class Game extends Thread{
                     if (player.isEvil && player.attributes.surgical > 0) {
                         player.attributes.surgical -= player.attributes.getSurgicalRegenSpeed();
                     }
-                    if (!player.isEvil){
+                    if (!player.isEvil) {
                         player.attributes.surgical += player.attributes.getSurgicalRegenSpeed();
                     }
                     if (!player.isEvil && player.lastHurt + player.attributes.getRestTime() <= new Date().getTime()) {
@@ -128,24 +128,25 @@ public class Game extends Thread{
                 Game.instance.evil.attributes.IQ += 20;
                 Game.instance.evil.attributes.knowledge += 20;
             }
-        }
-        //Check death
-        for (int i = 0; i < Game.instance.players.size() && !DEBUG; i++) {
-            GamePlayer gamePlayer = Game.instance.players.get(i);
-            if(gamePlayer.playerInstance != server.getPlayerList().getPlayerByName(gamePlayer.playerInstance.getDisplayName().getString())){
-                gamePlayer.playerInstance.setGameMode(GameType.SPECTATOR);
-                if(gamePlayer.isEvil){
-                    broadcast("Human win!");
-                    gameOver();
-                }else{
-                    Game.instance.humans.remove(gamePlayer);
+
+            //Check death
+            for (int i = 0; i < Game.instance.players.size() && !DEBUG; i++) {
+                GamePlayer gamePlayer = Game.instance.players.get(i);
+                if (gamePlayer.playerInstance != server.getPlayerList().getPlayerByName(gamePlayer.playerInstance.getDisplayName().getString())) {
+                    gamePlayer.playerInstance.setGameMode(GameType.SPECTATOR);
+                    if (gamePlayer.isEvil) {
+                        broadcast("Human win!");
+                        gameOver();
+                    } else {
+                        Game.instance.humans.remove(gamePlayer);
+                    }
                 }
             }
-        }
-        //Check winner
-        if(Game.instance.humans.size() == 0 && !DEBUG){
-            broadcast("Evil win!");
-            gameOver();
+            //Check winner
+            if (Game.instance.humans.size() == 0 && !DEBUG) {
+                broadcast("Evil win!");
+                gameOver();
+            }
         }
     }
 
