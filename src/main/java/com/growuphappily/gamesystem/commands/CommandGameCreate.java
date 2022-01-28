@@ -25,6 +25,10 @@ public class CommandGameCreate implements Command<CommandSourceStack> {
         new Game(EnumGameMode.MODE_NORMAL);
         context.getSource().sendSuccess(new TextComponent("Test"),false);
         for (ServerPlayer p:context.getSource().getServer().getPlayerList().getPlayers()) {
+            if(Game.instance.searchPlayerByName(p.getDisplayName().getString()).isEvil) {
+
+                continue;
+            }
             Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> p), new PackageOpenGUI("OPEN"));
         }
         return 0;

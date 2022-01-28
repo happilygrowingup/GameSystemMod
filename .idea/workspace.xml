@@ -4,9 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Add .idea">
+    <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Fix NullPointerException">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/runClient.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/runData.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/runServer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameKill.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectEvil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/models/EvilEternalHunter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageEvil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/util/Util.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandReg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandReg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/Networking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/Networking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Attributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Attributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
     </list>
+    <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +54,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/master" />
   </component>
@@ -54,8 +78,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="OverrideImplement.overriding.sorted" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
@@ -137,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643351734327</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix NullPointerException">
+      <created>1643353143982</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643353143982</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +192,7 @@
     </ignored-roots>
     <MESSAGE value="Update" />
     <MESSAGE value="Add .idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add .idea" />
+    <MESSAGE value="Fix NullPointerException" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix NullPointerException" />
   </component>
 </project>

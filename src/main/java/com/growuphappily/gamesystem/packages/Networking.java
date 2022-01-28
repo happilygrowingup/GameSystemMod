@@ -34,5 +34,12 @@ public class Networking {
                 PackageAttribute::new,
                 PackageAttribute::handler
         );
+        INSTANCE.registerMessage(
+                ID(),
+                PackageEvil.class,
+                PackageEvil::toBytes,
+                PackageEvil::new,
+                PackageEvil::handler
+        );
     }
 }

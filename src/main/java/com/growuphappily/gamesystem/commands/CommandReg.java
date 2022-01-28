@@ -30,6 +30,13 @@ public class CommandReg {
                                 .executes(CommandGameStart.instance)
                 )
         );
+        event.getDispatcher().register(
+                Commands.literal("game").then(
+                        Commands.literal("kill")
+                                .requires((CommandSource) -> CommandSource.hasPermission(0))
+                                .executes(CommandGameKill.instance)
+                )
+        );
     }
     @SubscribeEvent
     public static void onServerStart(ServerStartingEvent event){

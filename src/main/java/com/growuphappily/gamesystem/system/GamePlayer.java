@@ -4,6 +4,7 @@ package com.growuphappily.gamesystem.system;
 import com.growuphappily.gamesystem.enums.EnumAttackResult;
 import com.growuphappily.gamesystem.enums.EnumCastResult;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
+import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
@@ -11,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.Date;
 
@@ -22,6 +24,7 @@ public class GamePlayer {
     public float blood;
     public boolean isEvil = false;
     public long lastHurt = 0;
+    public long lastAttack = 0;
 
     public GamePlayer(ServerPlayer playerInstance){
         this.playerInstance = playerInstance;
@@ -66,6 +69,7 @@ public class GamePlayer {
 
     @SubscribeEvent
     public static void onPlayerAttack(AttackEntityEvent event){
+        LogManager.getLogger().info("Attack!");
         if(Game.isStarted) {
             GamePlayer player = Game.instance.searchPlayerByName(event.getPlayer().getDisplayName().getString());
             GamePlayer beingAttacked = Game.instance.searchPlayerByName(event.getTarget().getDisplayName().getString());
@@ -79,5 +83,10 @@ public class GamePlayer {
                 }
             }
         }
+    }
+
+    public static GamePlayer getEvilWithID(int ID, ServerPlayer playerInstance){
+        if (ID == 0) {return new EvilEternalHunter(playerInstance);}
+        return null;
     }
 }

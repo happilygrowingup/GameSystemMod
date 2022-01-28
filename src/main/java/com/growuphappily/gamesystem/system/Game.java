@@ -2,11 +2,14 @@ package com.growuphappily.gamesystem.system;
 
 import com.growuphappily.gamesystem.enums.EnumGameMode;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
+import com.growuphappily.gamesystem.models.EvilEternalHunter;
+import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.TickEvent;
@@ -17,10 +20,11 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class Game extends Thread{
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     public EnumGameMode gameMode;
     public ArrayList<GamePlayer> players = new ArrayList<>();
     public static Game instance;
@@ -62,6 +66,19 @@ public class Game extends Thread{
         broadcast("Game is ready.Run \"/game start\" to start game.");
     }
 
+    public void addEvil(GamePlayer p){
+        p.isEvil = true;
+        players.set(players.indexOf(evil), p);
+        evil = p;
+        broadcast(p.playerInstance.getDisplayName().getString() + " has finished selecting.");
+        for(GamePlayer player : players){
+            if(player.attributes == null){
+                return;
+            }
+        }
+        broadcast("Game is ready.Run \"/game start\" to start game.");
+    }
+
     public void start(){
         for(GamePlayer p : players){
             if(p.attributes == null){
@@ -89,7 +106,16 @@ public class Game extends Thread{
                     if (!player.isEvil) {
                         player.attributes.surgical += player.attributes.getSurgicalRegenSpeed();
                     }
+                    if(!player.isEvil && player.attributes.surgical > player.attributes.getMaxSurgical()){
+                        player.attributes.surgical = player.attributes.getMaxSurgical();
+                    }
+                    if(player.isEvil && player.attributes.surgical < 0){
+                        player.attributes.surgical = 0;
+                    }
                     if (!player.isEvil && player.lastHurt + player.attributes.getRestTime() <= new Date().getTime()) {
+                        player.blood += player.attributes.getRegenSpeed();
+                    }
+                    if(player.isEvil){
                         player.blood += player.attributes.getRegenSpeed();
                     }
                 }
@@ -105,7 +131,7 @@ public class Game extends Thread{
                 attrMoveSpeed.setBaseValue(player.attributes.getMoveSpeed());
                 AttributeInstance attrAttackSpeed = player.playerInstance.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED);
                 assert attrAttackSpeed != null;
-                attrAttackSpeed.setBaseValue(player.attributes.getAttackSpeed());
+                attrAttackSpeed.setBaseValue(attrAttackSpeed.getBaseValue() + player.attributes.getAttackSpeed());
                 player.playerInstance.setHealth(player.blood);
             }
             if (Game.instance.evil.attributes.surgical >= Game.instance.evil.attributes.maxtire) {
@@ -117,6 +143,7 @@ public class Game extends Thread{
                 Game.instance.evil.attributes.mental -= 20;
                 Game.instance.evil.attributes.IQ -= 20;
                 Game.instance.evil.attributes.knowledge -= 20;
+                Game.instance.evil.playerInstance.sendMessage(new TextComponent("[SYSTEM]You have overloaded!"), ChatType.SYSTEM, Util.NIL_UUID);
             }
             if (Game.instance.evil.attributes.surgical <= 0 && Game.instance.evil.state == EnumPlayerState.OVERLOADED) {
                 Game.instance.evil.state = null;
@@ -127,6 +154,7 @@ public class Game extends Thread{
                 Game.instance.evil.attributes.mental += 20;
                 Game.instance.evil.attributes.IQ += 20;
                 Game.instance.evil.attributes.knowledge += 20;
+                Game.instance.evil.playerInstance.sendMessage(new TextComponent("[SYSTEM]You have out of overload."), ChatType.SYSTEM, Util.NIL_UUID);
             }
 
             //Check death
@@ -175,5 +203,9 @@ public class Game extends Thread{
 
     public static void gameOver(){
         Game.isStarted = false;
+    }
+
+    public static boolean isInGame(Entity e){
+        return instance.searchPlayerByName(e.getDisplayName().getString()) != null;
     }
 }

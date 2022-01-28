@@ -16,7 +16,7 @@ public class Attributes {
     }
 
     public float getAttackSpeed(){
-        return (float) (1 / (1 + 0.3 + (speed*0.05)));
+        return (float) (0.3 + (speed*0.05));
     }
 
     public int getMaxBlood(){
