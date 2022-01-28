@@ -38,8 +38,8 @@ public class Game extends Thread{
         for (ServerPlayer p : server.getPlayerList().getPlayers()) {
             players.add(new GamePlayer(p));
         }
-        // evil = players.get(rand.nextInt(server.getPlayerCount()));
-        // evil.isEvil = true;
+        evil = players.get(rand.nextInt(server.getPlayerCount()));
+        evil.isEvil = true;
         for (GamePlayer player : players) {
             if (!player.isEvil) {
                 humans.add(player);
