@@ -120,24 +120,34 @@ public class Game extends Thread{
                     if(player.isEvil && player.attributes.surgical < 0){
                         player.attributes.surgical = 0;
                     }
-                    if (!player.isEvil && player.lastHurt + (long)player.attributes.getRestTime() <= new Date().getTime()) {
+                    if (!player.isEvil && player.lastHurt + (long)player.attributes.getRestTime() <= new Date().getTime() && !player.state.contains(EnumPlayerState.SOUL_BROKEN)) {
                         player.blood += player.attributes.getRegenSpeed();
-                        LogManager.getLogger().info("regen: " + player.attributes.getRestTime());
                     }
-                    if(player.isEvil){
-                        //player.blood += player.attributes.getRegenSpeed();
+                    if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){
+                        Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageAttribute(
+                                player.attributes.speed + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        new Random().nextInt(0,60) + "." +
+                                        true
+                        ));
+                    }else {
+                        Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageAttribute(
+                                player.attributes.speed + "." +
+                                        player.attributes.health + "." +
+                                        player.attributes.strength + "." +
+                                        player.attributes.defence + "." +
+                                        player.attributes.mental + "." +
+                                        player.attributes.IQ + "." +
+                                        player.attributes.knowledge + "." +
+                                        player.attributes.surgical + "." +
+                                        ((player.lastAttack + (long)(1 / player.attributes.getAttackSpeed())) * 1000 < new Date().getTime())
+                        ));
                     }
-                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageAttribute(
-                                    player.attributes.speed + "." +
-                                    player.attributes.health + "." +
-                                    player.attributes.strength + "." +
-                                    player.attributes.defence + "." +
-                                    player.attributes.mental + "." +
-                                    player.attributes.IQ + "." +
-                                    player.attributes.knowledge + "." +
-                                    player.attributes.surgical + "." +
-                                    ((player.lastAttack + 1/player.attributes.getAttackSpeed())*1000 < new Date().getTime())
-                    ));
                 }
                 lastTime = new Date().getTime();
             }
@@ -155,7 +165,7 @@ public class Game extends Thread{
                 player.playerInstance.setHealth(player.blood);
             }
             if (Game.instance.evil.attributes.surgical >= Game.instance.evil.attributes.maxtire) {
-                Game.instance.evil.state = EnumPlayerState.OVERLOADED;
+                Game.instance.evil.state.add(EnumPlayerState.OVERLOADED);
                 Game.instance.evil.attributes.speed -= 20;
                 Game.instance.evil.attributes.health -= 20;
                 Game.instance.evil.attributes.strength -= 20;
@@ -165,8 +175,8 @@ public class Game extends Thread{
                 Game.instance.evil.attributes.knowledge -= 20;
                 Game.instance.evil.playerInstance.sendMessage(new TextComponent("[SYSTEM]You have overloaded!"), ChatType.SYSTEM, Util.NIL_UUID);
             }
-            if (Game.instance.evil.attributes.surgical <= 0 && Game.instance.evil.state == EnumPlayerState.OVERLOADED) {
-                Game.instance.evil.state = null;
+            if (Game.instance.evil.attributes.surgical <= 0 && Game.instance.evil.state.contains(EnumPlayerState.OVERLOADED)) {
+                Game.instance.evil.state.remove(EnumPlayerState.OVERLOADED);
                 Game.instance.evil.attributes.speed += 20;
                 Game.instance.evil.attributes.health += 20;
                 Game.instance.evil.attributes.strength += 20;

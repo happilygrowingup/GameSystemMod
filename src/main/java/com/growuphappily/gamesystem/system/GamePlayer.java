@@ -9,19 +9,21 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Mod.EventBusSubscriber
 public class GamePlayer {
     public Attributes attributes;
     public ServerPlayer playerInstance;
-    public EnumPlayerState state;
+    public ArrayList<EnumPlayerState> state = new ArrayList<>();
     public float blood;
     public boolean isEvil = false;
     public long lastHurt = 0;
@@ -32,13 +34,16 @@ public class GamePlayer {
     }
 
     public EnumAttackResult Attack(GamePlayer beingAttacked){
+        if(beingAttacked.state.contains(EnumPlayerState.CAN_NOT_SELECT) || state.contains(EnumPlayerState.CAN_NOT_SELECT)){
+            return EnumAttackResult.MISSED;
+        }
         if((Dice.onedX(100) + this.attributes.speed*0.2) >= (20 + beingAttacked.attributes.speed*0.4)){
             beingAttacked.lastHurt = new Date().getTime();
             if(Dice.onedX(100) >= (Dice.onedX(100) + beingAttacked.attributes.defence - (attributes.strength * 0.1))){
-                beingAttacked.blood -= (attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1);
+                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), (float) ((attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1)));
                 return EnumAttackResult.CRITICAL;
             }else {
-                beingAttacked.blood -= (attributes.strength*0.1) + 5 - (beingAttacked.attributes.defence * 0.1);
+                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), (float) ((attributes.strength*0.1) + 5 - (beingAttacked.attributes.defence * 0.1)));
                 return EnumAttackResult.NORMAL;
             }
         }else{
@@ -47,7 +52,7 @@ public class GamePlayer {
     }
 
     public EnumCastResult tryCast(){
-        if(state == EnumPlayerState.OVERLOADED){
+        if(state.contains(EnumPlayerState.OVERLOADED) || state.contains(EnumPlayerState.LOCKED) || state.contains(EnumPlayerState.CAN_NOT_SELECT)){
             return EnumCastResult.FAIL;
         }
         int d = Dice.onedX(100);
@@ -96,5 +101,10 @@ public class GamePlayer {
     public static GamePlayer getEvilWithID(int ID, ServerPlayer playerInstance){
         if (ID == 0) {return new EvilEternalHunter(playerInstance);}
         return null;
+    }
+
+    public void hurt(DamageSource source, float amount){
+        playerInstance.hurt(source, amount);
+        blood -= amount;
     }
 }
