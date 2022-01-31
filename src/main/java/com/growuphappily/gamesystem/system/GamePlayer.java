@@ -76,8 +76,9 @@ public class GamePlayer {
             GamePlayer beingAttacked = Game.instance.searchPlayerByName(event.getTarget().getDisplayName().getString());
             if(beingAttacked != null){
                 event.setCanceled(true);
-                if(player.lastAttack + (1/player.attributes.getAttackSpeed())*1000 > new Date().getTime()){
+                if(player.lastAttack + (long)(1/player.attributes.getAttackSpeed())*1000 > new Date().getTime()){
                     LogManager.getLogger().info(player.playerInstance.getDisplayName().getString() + "'s attack is Cold!");
+                    player.playerInstance.sendMessage(new TextComponent("Colding!"), ChatType.SYSTEM, Util.NIL_UUID);
                     return;
                 }
                 EnumAttackResult result = player.Attack(beingAttacked);

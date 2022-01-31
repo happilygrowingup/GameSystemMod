@@ -22,10 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Mod.EventBusSubscriber
 public class Game extends Thread{
@@ -94,6 +91,7 @@ public class Game extends Thread{
         Game.isStarted = true;
         for(GamePlayer player : players){
             player.blood = player.attributes.getMaxBlood();
+            player.attributes.originalSpeed = Objects.requireNonNull(player.playerInstance.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)).getBaseValue();
             if (!player.isEvil) {
                 player.attributes.surgical = player.attributes.getMaxSurgical();
             }
@@ -122,9 +120,9 @@ public class Game extends Thread{
                     if(player.isEvil && player.attributes.surgical < 0){
                         player.attributes.surgical = 0;
                     }
-                    if (!player.isEvil && player.lastHurt + player.attributes.getRestTime() <= new Date().getTime()) {
+                    if (!player.isEvil && player.lastHurt + (long)player.attributes.getRestTime() <= new Date().getTime()) {
                         player.blood += player.attributes.getRegenSpeed();
-                        LogManager.getLogger().info("regen: " + player.attributes.getRegenSpeed());
+                        LogManager.getLogger().info("regen: " + player.attributes.getRestTime());
                     }
                     if(player.isEvil){
                         //player.blood += player.attributes.getRegenSpeed();
@@ -150,10 +148,10 @@ public class Game extends Thread{
                 attrMaxHealth.setBaseValue(player.attributes.getMaxBlood());
                 AttributeInstance attrMoveSpeed = player.playerInstance.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
                 assert attrMoveSpeed != null;
-                attrMoveSpeed.setBaseValue(player.attributes.getMoveSpeed());
-                AttributeInstance attrAttackSpeed = player.playerInstance.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED);
-                assert attrAttackSpeed != null;
-                attrAttackSpeed.setBaseValue(attrAttackSpeed.getBaseValue() + player.attributes.getAttackSpeed());
+                attrMoveSpeed.setBaseValue(player.attributes.originalSpeed + player.attributes.speed*player.attributes.originalSpeed*0.01);
+                // AttributeInstance attrAttackSpeed = player.playerInstance.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED);
+                // assert attrAttackSpeed != null;
+                // attrAttackSpeed.setBaseValue(attrAttackSpeed.getBaseValue() + player.attributes.getAttackSpeed());
                 player.playerInstance.setHealth(player.blood);
             }
             if (Game.instance.evil.attributes.surgical >= Game.instance.evil.attributes.maxtire) {

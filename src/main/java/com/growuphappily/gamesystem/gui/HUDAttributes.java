@@ -11,6 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.Date;
 
@@ -20,8 +21,17 @@ public class HUDAttributes extends Gui {
     public static Attributes attr = new Attributes(0,0,0,0,0,0,0,0);
     public static boolean isAttackInCold = false;
     public static int color = 0x0000FF;
-    public static int delta = 0X000001;
-    public long startTime;
+    public static float r = 0;
+    public static float g = 0;
+    public static float b = 255;
+    public static float deltaTime;
+    private enum Color{
+        R(),
+        G(),
+        B()
+    }
+    public long lastTime = 0;
+    public static Color currentColor = Color.R;
     public HUDAttributes(Minecraft p_93005_) {
         super(p_93005_);
         assert Minecraft.getInstance().player != null;
@@ -36,10 +46,41 @@ public class HUDAttributes extends Gui {
         drawString(new PoseStack(),getFont(),"mental:" + attr.mental, screenWidth/2, 60, color);
         drawString(new PoseStack(),getFont(),"IQ:" + attr.IQ, screenWidth/2, 70, color);
         drawString(new PoseStack(),getFont(),"knowledge:" + attr.knowledge, screenWidth/2, 80, color);
-        color = (int) (0xFFFFFF/4*Math.sin(new Date().getTime()/10000.0)) + 0xFFFFFF/2;
+
+        if(currentColor == Color.R){
+            b -= 5;
+            r += 5;
+            if(r>=255){
+                b = 0;
+                currentColor = Color.G;
+            }
+        }
+        if(currentColor == Color.G){
+            r -= 5;
+            g += 5;
+            if(g>=255){
+                r = 0;
+                currentColor = Color.B;
+            }
+        }
+        if(currentColor == Color.B){
+            g -= 5;
+            b += 5;
+            if(b>=255){
+                g = 0;
+                currentColor = Color.R;
+            }
+        }
+        //LogManager.getLogger().info(r);
+        //LogManager.getLogger().info(g);
+        //LogManager.getLogger().info(b);
+        //color = (int) Math.floor((0xFF0000*Math.abs(Math.sin(time/100000.))) + (0xFF00*Math.abs(Math.cos(time/100000.))));
+        color = getColor(r,g,b);
         if(isAttackInCold){
             drawCenteredString(new PoseStack(), getFont(), "Colding!", screenWidth/2, screenHeight/2 ,0xFF0000);
         }
+
+        lastTime = new Date().getTime();
     }
 
     @SubscribeEvent
@@ -54,5 +95,8 @@ public class HUDAttributes extends Gui {
             return;
         }
         new HUDAttributes(Minecraft.getInstance()).render();
+    }
+    public static int getColor(float r, float g, float b){
+        return (int)Math.min(r,255)*0x10000 + (int)Math.min(g,255)*0x100 + (int)Math.min(b,255);
     }
 }

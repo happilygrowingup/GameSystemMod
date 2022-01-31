@@ -10,10 +10,7 @@ public class Attributes {
     public int knowledge;
     public float surgical;
     public float maxtire = 200;
-
-    public float getMoveSpeed(){
-        return (float) (1+(speed*0.01));
-    }
+    public double originalSpeed;
 
     public float getAttackSpeed(){
         return (float) (0.3 + (speed*0.05));
