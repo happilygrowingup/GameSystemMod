@@ -1,6 +1,7 @@
 package com.growuphappily.gamesystem.packages;
 
 import com.growuphappily.gamesystem.gui.GUISelectAttribute;
+import com.growuphappily.gamesystem.gui.GUISelectEvil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketDecoder;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class PackageOpenGUI {
@@ -34,12 +36,17 @@ public class PackageOpenGUI {
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx){
-        ctx.get().enqueueWork(PackageOpenGUI::execute);
+        ctx.get().enqueueWork(this::execute);
         ctx.get().setPacketHandled(true);
     }
     @OnlyIn(Dist.CLIENT)
-    public static void execute(){
+    public void execute(){
         //Code for open client gui
-        Minecraft.getInstance().setScreen(new GUISelectAttribute(new TextComponent("Title")));
+        if (Objects.equals(message, "Attr")) {
+            Minecraft.getInstance().setScreen(new GUISelectAttribute(new TextComponent("Title")));
+        }
+        if (Objects.equals(message, "Evil")){
+            Minecraft.getInstance().setScreen(new GUISelectEvil(new TextComponent("Title")));
+        }
     }
 }

@@ -3,6 +3,9 @@ package com.growuphappily.gamesystem.system;
 import com.growuphappily.gamesystem.enums.EnumGameMode;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
 import com.growuphappily.gamesystem.models.EvilEternalHunter;
+import com.growuphappily.gamesystem.packages.Networking;
+import com.growuphappily.gamesystem.packages.PackageAttribute;
+import com.growuphappily.gamesystem.packages.PackageGameStart;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
@@ -16,6 +19,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +29,7 @@ import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class Game extends Thread{
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     public EnumGameMode gameMode;
     public ArrayList<GamePlayer> players = new ArrayList<>();
     public static Game instance;
@@ -89,8 +94,13 @@ public class Game extends Thread{
         Game.isStarted = true;
         for(GamePlayer player : players){
             player.blood = player.attributes.getMaxBlood();
+            if (!player.isEvil) {
+                player.attributes.surgical = player.attributes.getMaxSurgical();
+            }
+            Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageGameStart(true));
         }
         evil.attributes.surgical = 0;
+        broadcast("Game Started!");
         broadcast(evil.playerInstance.getDisplayName().getString() + " is EVIL!!BE CAREFUL!!");
     }
 
@@ -114,10 +124,22 @@ public class Game extends Thread{
                     }
                     if (!player.isEvil && player.lastHurt + player.attributes.getRestTime() <= new Date().getTime()) {
                         player.blood += player.attributes.getRegenSpeed();
+                        LogManager.getLogger().info("regen: " + player.attributes.getRegenSpeed());
                     }
                     if(player.isEvil){
-                        player.blood += player.attributes.getRegenSpeed();
+                        //player.blood += player.attributes.getRegenSpeed();
                     }
+                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageAttribute(
+                                    player.attributes.speed + "." +
+                                    player.attributes.health + "." +
+                                    player.attributes.strength + "." +
+                                    player.attributes.defence + "." +
+                                    player.attributes.mental + "." +
+                                    player.attributes.IQ + "." +
+                                    player.attributes.knowledge + "." +
+                                    player.attributes.surgical + "." +
+                                    ((player.lastAttack + 1/player.attributes.getAttackSpeed())*1000 < new Date().getTime())
+                    ));
                 }
                 lastTime = new Date().getTime();
             }
@@ -160,8 +182,9 @@ public class Game extends Thread{
             //Check death
             for (int i = 0; i < Game.instance.players.size() && !DEBUG; i++) {
                 GamePlayer gamePlayer = Game.instance.players.get(i);
-                if (gamePlayer.playerInstance != server.getPlayerList().getPlayerByName(gamePlayer.playerInstance.getDisplayName().getString())) {
+                if (gamePlayer.playerInstance != server.getPlayerList().getPlayerByName(gamePlayer.playerInstance.getDisplayName().getString()) || gamePlayer.blood <= 0) {
                     gamePlayer.playerInstance.setGameMode(GameType.SPECTATOR);
+                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> gamePlayer.playerInstance), new PackageGameStart(false));
                     if (gamePlayer.isEvil) {
                         broadcast("Human win!");
                         gameOver();
@@ -203,6 +226,9 @@ public class Game extends Thread{
 
     public static void gameOver(){
         Game.isStarted = false;
+        for (GamePlayer player: instance.players) {
+            Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageGameStart(false));
+        }
     }
 
     public static boolean isInGame(Entity e){

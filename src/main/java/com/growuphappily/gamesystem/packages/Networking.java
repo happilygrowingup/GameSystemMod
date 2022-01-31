@@ -41,5 +41,12 @@ public class Networking {
                 PackageEvil::new,
                 PackageEvil::handler
         );
+        INSTANCE.registerMessage(
+                ID(),
+                PackageGameStart.class,
+                PackageGameStart::toBytes,
+                PackageGameStart::new,
+                PackageGameStart::handler
+        );
     }
 }

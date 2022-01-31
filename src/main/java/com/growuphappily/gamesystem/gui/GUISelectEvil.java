@@ -20,17 +20,22 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 public class GUISelectEvil extends Screen {
     Button buttonEternalHunter;
-    protected GUISelectEvil(Component p_96550_) {
+    public GUISelectEvil(Component p_96550_) {
         super(p_96550_);
     }
 
     @Override
     protected void init() {
-        buttonEternalHunter = new Button(width/2 - 10, height/2 - 5, 20, 10,new TextComponent("EternalHunter"), (button) -> {
-            Game.instance.addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(0, Util.getServerPlayerByNameAtClient())));
+        assert minecraft != null;
+        minecraft.keyboardHandler.setSendRepeatsToGui(true);
+        buttonEternalHunter = new Button(width/2 - 50, height/2 - 5, 100, 10,new TextComponent("EternalHunter"), (button) -> {
+            assert Minecraft.getInstance().player != null;
+            //Game.instance.addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(0, Game.server.getPlayerList().getPlayerByName(Minecraft.getInstance().player.getDisplayName().getString()))));
             Networking.INSTANCE.sendToServer(new PackageEvil(0));
             Minecraft.getInstance().setScreen(null);
         });
+        super.init();
+        addRenderableWidget(buttonEternalHunter);
     }
 
     @Override

@@ -9,6 +9,7 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +32,7 @@ public class GamePlayer {
     }
 
     public EnumAttackResult Attack(GamePlayer beingAttacked){
-        if(((Dice.onedX(100) + this.attributes.speed)*0.2) >= (20 + beingAttacked.attributes.speed*0.4)){
+        if((Dice.onedX(100) + this.attributes.speed*0.2) >= (20 + beingAttacked.attributes.speed*0.4)){
             beingAttacked.lastHurt = new Date().getTime();
             if(Dice.onedX(100) >= (Dice.onedX(100) + beingAttacked.attributes.defence - (attributes.strength * 0.1))){
                 beingAttacked.blood -= (attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1);
@@ -69,16 +70,22 @@ public class GamePlayer {
 
     @SubscribeEvent
     public static void onPlayerAttack(AttackEntityEvent event){
-        LogManager.getLogger().info("Attack!");
-        if(Game.isStarted) {
+        //LogManager.getLogger().info("Attack!");
+        if(Game.isStarted && Game.instance != null) {
             GamePlayer player = Game.instance.searchPlayerByName(event.getPlayer().getDisplayName().getString());
             GamePlayer beingAttacked = Game.instance.searchPlayerByName(event.getTarget().getDisplayName().getString());
             if(beingAttacked != null){
                 event.setCanceled(true);
+                if(player.lastAttack + (1/player.attributes.getAttackSpeed())*1000 > new Date().getTime()){
+                    LogManager.getLogger().info(player.playerInstance.getDisplayName().getString() + "'s attack is Cold!");
+                    return;
+                }
                 EnumAttackResult result = player.Attack(beingAttacked);
+                player.lastAttack = new Date().getTime();
+                beingAttacked.lastHurt = player.lastAttack;
                 if(result == EnumAttackResult.CRITICAL){
                     player.playerInstance.sendMessage(new TextComponent("CRITICAL!"), ChatType.SYSTEM, Util.NIL_UUID);
-                }else{
+                }else if(result == EnumAttackResult.MISSED){
                     player.playerInstance.sendMessage(new TextComponent("MISSED!"), ChatType.SYSTEM, Util.NIL_UUID);
                 }
             }

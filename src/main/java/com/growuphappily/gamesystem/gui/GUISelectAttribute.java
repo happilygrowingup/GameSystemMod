@@ -131,7 +131,7 @@ public class GUISelectAttribute extends Screen {
                 mental + "." +
                 IQ + "." +
                 knowledge + "." +
-                surgical
+                surgical + "."
         ));
     }
 }

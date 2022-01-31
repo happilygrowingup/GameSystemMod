@@ -9,7 +9,7 @@ public class Attributes {
     public int IQ;
     public int knowledge;
     public float surgical;
-    public float maxtire = 200;  //TODO:temp
+    public float maxtire = 200;
 
     public float getMoveSpeed(){
         return (float) (1+(speed*0.01));
@@ -24,11 +24,11 @@ public class Attributes {
     }
 
     public float getRegenSpeed(){
-        return (float) (getMaxBlood()*(100+(health*0.02))/100);
+        return (float) (getMaxBlood()*(100 + (health*0.02))/100)/getMaxBlood();
     }
 
     public float getRestTime(){
-        return (float) (10 - (health*0.05));
+        return (float) (20 - (health*0.05))*1000;
     }
 
     public float getMaxSurgical(){
