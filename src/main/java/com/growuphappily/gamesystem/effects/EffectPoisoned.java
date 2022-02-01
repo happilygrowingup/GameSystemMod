@@ -17,6 +17,8 @@ import java.util.TimerTask;
 
 @Mod.EventBusSubscriber
 public class EffectPoisoned {
+    public static final String message = "Poisoned";
+    public static final int ID = 6;
     public static ArrayList<GamePlayer> affectedPlayers = new ArrayList<>();
     public static ArrayList<GamePlayer> originalPlayers = new ArrayList<>();
 

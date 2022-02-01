@@ -48,5 +48,19 @@ public class Networking {
                 PackageGameStart::new,
                 PackageGameStart::handler
         );
+        INSTANCE.registerMessage(
+                ID(),
+                PackageRule.class,
+                PackageRule::toBytes,
+                PackageRule::new,
+                PackageRule::handler
+        );
+        INSTANCE.registerMessage(
+                ID(),
+                PackagePlayerState.class,
+                PackagePlayerState::toBytes,
+                PackagePlayerState::new,
+                PackagePlayerState::handler
+        );
     }
 }

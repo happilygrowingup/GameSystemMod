@@ -2,7 +2,6 @@ package com.growuphappily.gamesystem.gui;
 
 import com.growuphappily.gamesystem.system.Attributes;
 import com.growuphappily.gamesystem.system.Game;
-import com.growuphappily.gamesystem.system.GamePlayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -11,8 +10,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.LogManager;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @OnlyIn(Dist.CLIENT)
@@ -25,6 +24,7 @@ public class HUDAttributes extends Gui {
     public static float g = 0;
     public static float b = 255;
     public static float deltaTime;
+    public static ArrayList<String> specialState = new ArrayList<>();
     private enum Color{
         R(),
         G(),
@@ -46,7 +46,13 @@ public class HUDAttributes extends Gui {
         drawString(new PoseStack(),getFont(),"mental:" + attr.mental, screenWidth/2, 60, color);
         drawString(new PoseStack(),getFont(),"IQ:" + attr.IQ, screenWidth/2, 70, color);
         drawString(new PoseStack(),getFont(),"knowledge:" + attr.knowledge, screenWidth/2, 80, color);
-
+        if(!specialState.isEmpty()){
+            int h = 80;
+            for (int i = 0; i < specialState.size(); i++) {
+                h += 10;
+                drawString(new PoseStack(),getFont(),specialState.get(i) + attr.knowledge, screenWidth/2, h, color);
+            }
+        }
         if(currentColor == Color.R){
             b -= 5;
             r += 5;

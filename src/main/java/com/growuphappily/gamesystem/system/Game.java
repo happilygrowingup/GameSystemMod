@@ -1,11 +1,16 @@
 package com.growuphappily.gamesystem.system;
 
+import com.growuphappily.gamesystem.effects.*;
 import com.growuphappily.gamesystem.enums.EnumGameMode;
+import com.growuphappily.gamesystem.enums.EnumGameStage;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
+import com.growuphappily.gamesystem.enums.EnumRules;
 import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import com.growuphappily.gamesystem.packages.Networking;
 import com.growuphappily.gamesystem.packages.PackageAttribute;
 import com.growuphappily.gamesystem.packages.PackageGameStart;
+import com.growuphappily.gamesystem.packages.PackagePlayerState;
+import com.growuphappily.gamesystem.rules.RuleBloodFeast;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
@@ -35,7 +40,8 @@ public class Game extends Thread{
     public GamePlayer evil;
     public ArrayList<GamePlayer> humans = new ArrayList<>();
     private static long lastTime = 0;
-
+    public static EnumGameStage stage;
+    public static EnumRules rule;
     public Game(EnumGameMode gameMode){
         instance = this;
         isStarted = false;
@@ -60,12 +66,9 @@ public class Game extends Thread{
     public void addPlayerAttributes(ServerPlayer p, Attributes attributes){
         searchPlayerByName(p.getDisplayName().getString()).addAttributes(attributes);
         broadcast(p.getDisplayName().getString() + " has finished selecting.");
-        for(GamePlayer player : players){
-            if(player.attributes == null){
-                return;
-            }
+        if (isReady()) {
+            broadcast("Game is ready.Run \"/game start\" to start game.");
         }
-        broadcast("Game is ready.Run \"/game start\" to start game.");
     }
 
     public void addEvil(GamePlayer p){
@@ -73,20 +76,14 @@ public class Game extends Thread{
         players.set(players.indexOf(evil), p);
         evil = p;
         broadcast(p.playerInstance.getDisplayName().getString() + " has finished selecting.");
-        for(GamePlayer player : players){
-            if(player.attributes == null){
-                return;
-            }
+        if(isReady()) {
+            broadcast("Game is ready.Run \"/game start\" to start game.");
         }
-        broadcast("Game is ready.Run \"/game start\" to start game.");
     }
 
     public void start(){
-        for(GamePlayer p : players){
-            if(p.attributes == null){
-                broadcast("Game is not ready!");
-                return;
-            }
+        if(isReady()) {
+            broadcast("Game is not ready!");
         }
         Game.isStarted = true;
         for(GamePlayer player : players){
@@ -109,10 +106,18 @@ public class Game extends Thread{
                 for (int i = 0; i < Game.instance.players.size(); i++) {
                     GamePlayer player = Game.instance.players.get(i);
                     if (player.isEvil && player.attributes.surgical > 0) {
-                        player.attributes.surgical -= player.attributes.getSurgicalRegenSpeed();
+                        if(rule == EnumRules.BLOOD_FEAST){
+                            player.attributes.surgical -= player.attributes.getSurgicalRegenSpeed()*0.8f;
+                        }else {
+                            player.attributes.surgical -= player.attributes.getSurgicalRegenSpeed();
+                        }
                     }
                     if (!player.isEvil) {
-                        player.attributes.surgical += player.attributes.getSurgicalRegenSpeed();
+                        if(rule == EnumRules.BLOOD_FEAST){
+                            player.attributes.surgical += player.attributes.getSurgicalRegenSpeed()*0.5f;
+                        }else{
+                            player.attributes.surgical += player.attributes.getSurgicalRegenSpeed();
+                        }
                     }
                     if(!player.isEvil && player.attributes.surgical > player.attributes.getMaxSurgical()){
                         player.attributes.surgical = player.attributes.getMaxSurgical();
@@ -147,6 +152,25 @@ public class Game extends Thread{
                                         player.attributes.surgical + "." +
                                         ((player.lastAttack + (long)(1 / player.attributes.getAttackSpeed())) * 1000 < new Date().getTime())
                         ));
+                    }
+                    if(player.state.size() > 0){
+                        ArrayList<String> msg = new ArrayList<>();
+                        if(player.state.contains(EnumPlayerState.LOCKED)){msg.add(EffectLocked.message);}
+                        if(player.state.contains(EnumPlayerState.SOUL_BROKEN)){msg.add(EffectBrokenSoul.message);}
+                        if(player.state.contains(EnumPlayerState.CAN_NOT_SELECT)){msg.add(EffectCanNotSelect.message);}
+                        if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){msg.add(EffectInfoOverloaded.message);}
+                        if(player.state.contains(EnumPlayerState.OVERLOADED)){msg.add("Overloaded");}
+                        if(EffectDeepVally.affectedPlayers.contains(player)){msg.add(EffectDeepVally.message);}
+                        if(EffectPoisoned.affectedPlayers.contains(player)){msg.add(EffectBrokenSoul.message);}
+                        StringBuilder str = new StringBuilder();
+                        for (String s:msg) {
+                            if(msg.indexOf(s) == msg.size()-1){
+                                str.append(s);
+                            }else {
+                                str.append(s).append(".");
+                            }
+                        }
+                        Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackagePlayerState(str.toString()));
                     }
                 }
                 lastTime = new Date().getTime();
@@ -237,9 +261,25 @@ public class Game extends Thread{
         for (GamePlayer player: instance.players) {
             Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageGameStart(false));
         }
+        Game.stage = null;
     }
 
     public static boolean isInGame(Entity e){
         return instance.searchPlayerByName(e.getDisplayName().getString()) != null;
+    }
+
+    public static void addRule(int ID){
+        if(ID == RuleBloodFeast.ID){
+            Game.rule = EnumRules.BLOOD_FEAST;
+        }
+    }
+
+    public static boolean isReady(){
+        for (GamePlayer player : Game.instance.players){
+            if (player.attributes == null){
+                return false;
+            }
+        }
+        return Game.rule != null;
     }
 }

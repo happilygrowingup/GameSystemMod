@@ -32,7 +32,7 @@ public class GUISelectEvil extends Screen {
             assert Minecraft.getInstance().player != null;
             //Game.instance.addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(0, Game.server.getPlayerList().getPlayerByName(Minecraft.getInstance().player.getDisplayName().getString()))));
             Networking.INSTANCE.sendToServer(new PackageEvil(0));
-            Minecraft.getInstance().setScreen(null);
+            Minecraft.getInstance().setScreen(new GUISelectRule(new TextComponent("Title")));
         });
         super.init();
         addRenderableWidget(buttonEternalHunter);

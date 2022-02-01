@@ -8,14 +8,14 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class PackageEvil {
+public class PackageRule {
     public int message;
 
-    public PackageEvil(FriendlyByteBuf buf){
+    public PackageRule(FriendlyByteBuf buf){
         message = buf.readInt();
     }
 
-    public PackageEvil(int message){
+    public PackageRule(int message){
         this.message = message;
     }
 
@@ -25,7 +25,7 @@ public class PackageEvil {
 
     public void handler(Supplier<NetworkEvent.Context> ctx){
         ctx.get().enqueueWork(() -> {
-            Game.instance.addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(message, ctx.get().getSender())));
+            Game.addRule(message);
         });
         ctx.get().setPacketHandled(true);
     }

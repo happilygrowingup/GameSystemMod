@@ -10,6 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class EffectInfoOverloaded {
+    public static final int ID = 4;
+    public static final String message = "Info Overloaded";
     public void addPlayer(GamePlayer player, int time){
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {

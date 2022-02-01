@@ -5,19 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Finish framework bug fix">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenArmor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenSoul.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectCanNotSelect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectDeepVally.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectInfoOverloaded.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectLocked.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectPoisoned.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/enums/EnumGameStage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/enums/EnumRules.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/keybinds/KeySelectAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackagePlayerState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/rules/RuleBloodFeast.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectPosioned.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/enums/EnumPlayerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/enums/EnumPlayerState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenSoul.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenSoul.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectCanNotSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectCanNotSelect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectDeepVally.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectDeepVally.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectInfoOverloaded.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectInfoOverloaded.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectLocked.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectLocked.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectPoisoned.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectPoisoned.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectEvil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectEvil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/Networking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/Networking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageEvil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageEvil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
     </list>
     <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +78,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -301,20 +310,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Finish framework bug fix" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectEvil.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectEvil.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="player.lastHurt" language="JAVA" />

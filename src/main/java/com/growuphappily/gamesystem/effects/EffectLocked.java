@@ -11,6 +11,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class EffectLocked {
+    public static final int ID = 5;
+    public static final String message = "Locked";
     public void addPlayer(GamePlayer player, int time){
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
