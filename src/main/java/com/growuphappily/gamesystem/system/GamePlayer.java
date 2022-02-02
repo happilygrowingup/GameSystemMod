@@ -10,7 +10,8 @@ import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraftforge.api.distmarker.Dist;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +29,9 @@ public class GamePlayer {
     public boolean isEvil = false;
     public long lastHurt = 0;
     public long lastAttack = 0;
+    public boolean isSuperRegened = false;
+    public boolean canSuperRegen = false;
+    public boolean isLocked;
 
     public GamePlayer(ServerPlayer playerInstance){
         this.playerInstance = playerInstance;
@@ -94,6 +98,16 @@ public class GamePlayer {
                 }else if(result == EnumAttackResult.MISSED){
                     player.playerInstance.sendMessage(new TextComponent("MISSED!"), ChatType.SYSTEM, Util.NIL_UUID);
                 }
+                if(player.state.contains(EnumPlayerState.HUNTING)){
+                    int dice = Dice.onedX(100);
+                    if ((double)dice >= (double)5 + (double)beingAttacked.attributes.mental*0.1 + (double)beingAttacked.attributes.defence){
+                        beingAttacked.blood = 0;
+                        player.playerInstance.sendMessage(new TextComponent("HUNT KILL!"), ChatType.SYSTEM, Util.NIL_UUID);
+                        Game.broadcast("Evil killed " + beingAttacked.playerInstance.getDisplayName().getString() + " using hunting mode!!");
+                    }else{
+                        beingAttacked.playerInstance.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,5,1));
+                    }
+                }
             }
         }
     }
@@ -106,5 +120,7 @@ public class GamePlayer {
     public void hurt(DamageSource source, float amount){
         playerInstance.hurt(source, amount);
         blood -= amount;
+        isSuperRegened = true;
     }
+
 }

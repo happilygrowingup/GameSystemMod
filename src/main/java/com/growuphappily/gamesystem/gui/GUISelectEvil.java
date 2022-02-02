@@ -1,5 +1,6 @@
 package com.growuphappily.gamesystem.gui;
 
+import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import com.growuphappily.gamesystem.packages.Networking;
 import com.growuphappily.gamesystem.packages.PackageEvil;
 import com.growuphappily.gamesystem.system.Game;
@@ -32,6 +33,7 @@ public class GUISelectEvil extends Screen {
             assert Minecraft.getInstance().player != null;
             //Game.instance.addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(0, Game.server.getPlayerList().getPlayerByName(Minecraft.getInstance().player.getDisplayName().getString()))));
             Networking.INSTANCE.sendToServer(new PackageEvil(0));
+            HUDSelectSkill.skills.addAll(EvilEternalHunter.skills);
             Minecraft.getInstance().setScreen(new GUISelectRule(new TextComponent("Title")));
         });
         super.init();

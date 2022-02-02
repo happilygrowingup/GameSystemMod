@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class PackagePlayerState {
@@ -37,6 +38,10 @@ public class PackagePlayerState {
     }
     @OnlyIn(Dist.CLIENT)
     public void execute(){
-        HUDAttributes.specialState = (ArrayList<String>) Arrays.asList(message.split("\\."));
+        if(Objects.equals(message, "")){
+            HUDAttributes.specialState = new ArrayList<>();
+            return;
+        }
+        HUDAttributes.specialState = new ArrayList<String>(Arrays.asList(message.split("\\.")));
     }
 }

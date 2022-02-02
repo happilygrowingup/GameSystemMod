@@ -121,7 +121,7 @@ public class GUISelectAttribute extends Screen {
     }
 
     public void endSelecting(){
-        Minecraft.getInstance().setScreen(null);
+        Minecraft.getInstance().setScreen(null); //TODO: Switch to skill elect screen
         assert Minecraft.getInstance().player != null;
         Networking.INSTANCE.sendToServer(new PackageAttribute(
                 speed + "." +

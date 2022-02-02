@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,8 +22,8 @@ public class EffectPoisoned {
     public static final int ID = 6;
     public static ArrayList<GamePlayer> affectedPlayers = new ArrayList<>();
     public static ArrayList<GamePlayer> originalPlayers = new ArrayList<>();
-
-    public void addPlayer(GamePlayer player, int time){
+    public static long lastHurt = 0;
+    public static void addPlayer(GamePlayer player, int time){
         originalPlayers.add(player);
         affectedPlayers.add(player);
         Timer timer = new Timer();
@@ -38,9 +39,13 @@ public class EffectPoisoned {
     @SubscribeEvent
     public static void onTick(TickEvent.ServerTickEvent event){
         if(Game.isStarted) {
-            for (int i = 0; i < affectedPlayers.size(); i++) {
-                GamePlayer player = affectedPlayers.get(i);
-                player.hurt(DamageSource.MAGIC, (float) (5 - player.attributes.defence*0.1));
+            if(lastHurt + (long)1000 <= new Date().getTime()) {
+                for (int i = 0; i < affectedPlayers.size(); i++) {
+                    GamePlayer player = affectedPlayers.get(i);
+                    player.hurt(DamageSource.MAGIC, (float) (5 - player.attributes.defence * 0.1));
+                    player.blood -= (float) (5 - player.attributes.defence * 0.1);
+                }
+                lastHurt = new Date().getTime();
             }
         }
     }

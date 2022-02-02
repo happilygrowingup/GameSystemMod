@@ -16,10 +16,6 @@ import org.lwjgl.glfw.GLFW;
 public class KeySelectAbility {
     public static final KeyMapping KEY = new KeyMapping("key.message", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.category.ability");
     public static boolean isDown = false;
-    @SubscribeEvent
-    public static void onKeyReg(FMLClientSetupEvent event){
-        ClientRegistry.registerKeyBinding(KEY);
-    }
 
     @SubscribeEvent
     public static void onKeyPress(InputEvent.KeyInputEvent event){

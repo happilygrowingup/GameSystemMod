@@ -105,19 +105,28 @@ public class Game extends Thread{
             if (new Date().getTime() >= lastTime + 1000) {  //Exec by seconds
                 for (int i = 0; i < Game.instance.players.size(); i++) {
                     GamePlayer player = Game.instance.players.get(i);
-                    if (player.isEvil && player.attributes.surgical > 0) {
+                    if (player.isEvil && player.attributes.surgical > 0 && !player.state.contains(EnumPlayerState.HUNTING)) {
                         if(rule == EnumRules.BLOOD_FEAST){
                             player.attributes.surgical -= player.attributes.getSurgicalRegenSpeed()*0.8f;
                         }else {
                             player.attributes.surgical -= player.attributes.getSurgicalRegenSpeed();
                         }
                     }
-                    if (!player.isEvil) {
-                        if(rule == EnumRules.BLOOD_FEAST){
-                            player.attributes.surgical += player.attributes.getSurgicalRegenSpeed()*0.5f;
+                    if(player.state.contains(EnumPlayerState.HUNTING)){
+                        player.attributes.surgical += 2;
+                    }
+                    if (!player.isEvil && !player.state.contains(EnumPlayerState.SOUL_BROKEN)) {
+                        if(player.attributes.surgical <= player.attributes.getMaxSurgical()*0.25 && player.attributes.surgical > 0.){
+                            player.attributes.surgical += 1.2 * (rule == EnumRules.BLOOD_FEAST ? 0.5 : 1.0);
+                        }else if((double)player.attributes.surgical > (double)player.attributes.getMaxSurgical()*0.25 && (double)player.attributes.surgical <= (double)player.attributes.getMaxSurgical()*0.7){
+                            player.attributes.surgical += 1.5 * (rule == EnumRules.BLOOD_FEAST ? 0.5 : 1.0);
                         }else{
-                            player.attributes.surgical += player.attributes.getSurgicalRegenSpeed();
+                            player.attributes.surgical += 1.7 * (rule == EnumRules.BLOOD_FEAST ? 0.5 : 1.0);
                         }
+                    }
+                    if(player.attributes.surgical == 0 && !player.state.contains(EnumPlayerState.SOUL_BROKEN) && !player.isEvil){
+                        EffectBrokenSoul.addPlayer(player, 4);
+                        player.attributes.surgical = 0.1f;
                     }
                     if(!player.isEvil && player.attributes.surgical > player.attributes.getMaxSurgical()){
                         player.attributes.surgical = player.attributes.getMaxSurgical();
@@ -125,9 +134,14 @@ public class Game extends Thread{
                     if(player.isEvil && player.attributes.surgical < 0){
                         player.attributes.surgical = 0;
                     }
-                    if (!player.isEvil && player.lastHurt + (long)player.attributes.getRestTime() <= new Date().getTime() && !player.state.contains(EnumPlayerState.SOUL_BROKEN)) {
-                        player.blood += player.attributes.getRegenSpeed();
+                    if (!player.isEvil && player.lastHurt + (long)player.attributes.getRestTime() <= new Date().getTime()) {
+                        if(player.canSuperRegen && !player.isSuperRegened){
+                            player.blood += player.attributes.getMaxBlood() * 0.02;
+                        }else {
+                            player.blood += player.attributes.getMaxBlood() * 0.01;
+                        }
                     }
+                    // Update client attributes display
                     if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){
                         Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageAttribute(
                                 player.attributes.speed + "." +
@@ -153,28 +167,35 @@ public class Game extends Thread{
                                         ((player.lastAttack + (long)(1 / player.attributes.getAttackSpeed())) * 1000 < new Date().getTime())
                         ));
                     }
-                    if(player.state.size() > 0){
-                        ArrayList<String> msg = new ArrayList<>();
-                        if(player.state.contains(EnumPlayerState.LOCKED)){msg.add(EffectLocked.message);}
-                        if(player.state.contains(EnumPlayerState.SOUL_BROKEN)){msg.add(EffectBrokenSoul.message);}
-                        if(player.state.contains(EnumPlayerState.CAN_NOT_SELECT)){msg.add(EffectCanNotSelect.message);}
-                        if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){msg.add(EffectInfoOverloaded.message);}
-                        if(player.state.contains(EnumPlayerState.OVERLOADED)){msg.add("Overloaded");}
-                        if(EffectDeepVally.affectedPlayers.contains(player)){msg.add(EffectDeepVally.message);}
-                        if(EffectPoisoned.affectedPlayers.contains(player)){msg.add(EffectBrokenSoul.message);}
-                        StringBuilder str = new StringBuilder();
-                        for (String s:msg) {
-                            if(msg.indexOf(s) == msg.size()-1){
-                                str.append(s);
-                            }else {
-                                str.append(s).append(".");
-                            }
+                    // Update client effects display
+                    ArrayList<String> msg = new ArrayList<>();
+                    if(player.state.contains(EnumPlayerState.LOCKED)){msg.add(EffectLocked.message);}
+                    if(player.state.contains(EnumPlayerState.SOUL_BROKEN)){msg.add(EffectBrokenSoul.message);}
+                    if(player.state.contains(EnumPlayerState.CAN_NOT_SELECT)){msg.add(EffectCanNotSelect.message);}
+                    if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){msg.add(EffectInfoOverloaded.message);}
+                    if(player.state.contains(EnumPlayerState.OVERLOADED)){msg.add("Overloaded");}
+                    if(EffectDeepVally.affectedPlayers.contains(player)){msg.add(EffectDeepVally.message);}
+                    if(EffectPoisoned.affectedPlayers.contains(player)){msg.add(EffectBrokenSoul.message);}
+                    if(player.state.contains(EnumPlayerState.HUNTING)){msg.add("Hunting");}
+                    StringBuilder str = new StringBuilder();
+                    for (String s:msg) {
+                        if(msg.indexOf(s) == msg.size()-1){
+                            str.append(s);
+                        }else {
+                            str.append(s).append(".");
                         }
-                        Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackagePlayerState(str.toString()));
                     }
+                    Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackagePlayerState(str.toString()));
                 }
                 lastTime = new Date().getTime();
             }
+            for (int j = 0; j < Game.instance.humans.size(); j++) {
+                GamePlayer human = Game.instance.humans.get(j);
+                if(!human.isSuperRegened && human.blood > (float)human.attributes.getMaxBlood()*0.1 && human.blood < (float) human.attributes.getMaxBlood()*0.5){
+                    human.canSuperRegen = true;
+                }
+            }
+            // Set base value
             for (int i = 0; i < Game.instance.players.size(); i++) {
                 GamePlayer player = Game.instance.players.get(i);
                 AttributeInstance attrMaxHealth = player.playerInstance.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH);
@@ -188,7 +209,9 @@ public class Game extends Thread{
                 // attrAttackSpeed.setBaseValue(attrAttackSpeed.getBaseValue() + player.attributes.getAttackSpeed());
                 player.playerInstance.setHealth(player.blood);
             }
-            if (Game.instance.evil.attributes.surgical >= Game.instance.evil.attributes.maxtire) {
+            // Check overload
+            if (Game.instance.evil.attributes.surgical >= Game.instance.evil.attributes.maxtire && !Game.instance.evil.state.contains(EnumPlayerState.OVERLOADED)) {
+                Game.instance.evil.state.remove(EnumPlayerState.HUNTING);
                 Game.instance.evil.state.add(EnumPlayerState.OVERLOADED);
                 Game.instance.evil.attributes.speed -= 20;
                 Game.instance.evil.attributes.health -= 20;
@@ -210,7 +233,6 @@ public class Game extends Thread{
                 Game.instance.evil.attributes.knowledge += 20;
                 Game.instance.evil.playerInstance.sendMessage(new TextComponent("[SYSTEM]You have out of overload."), ChatType.SYSTEM, Util.NIL_UUID);
             }
-
             //Check death
             for (int i = 0; i < Game.instance.players.size() && !DEBUG; i++) {
                 GamePlayer gamePlayer = Game.instance.players.get(i);
@@ -262,6 +284,12 @@ public class Game extends Thread{
             Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageGameStart(false));
         }
         Game.stage = null;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Game.instance = null;
+            }
+        }, 1000);
     }
 
     public static boolean isInGame(Entity e){

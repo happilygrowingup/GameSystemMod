@@ -1,4 +1,6 @@
 {
   "key.message": "Ability Select Key",
-  "key.category.ability": "Game System"
+  "key.category.ability": "Game System",
+  "com.growuphappily.gamesystem.skills.SkillPlaceTrap": "Place Trap",
+  "com.growuphappily.gamesystem.skills.SkillStartHunt": "Start Hunt Mode"
 }

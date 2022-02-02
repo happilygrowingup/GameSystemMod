@@ -47,10 +47,11 @@ public class HUDAttributes extends Gui {
         drawString(new PoseStack(),getFont(),"IQ:" + attr.IQ, screenWidth/2, 70, color);
         drawString(new PoseStack(),getFont(),"knowledge:" + attr.knowledge, screenWidth/2, 80, color);
         if(!specialState.isEmpty()){
-            int h = 80;
+            drawString(new PoseStack(),getFont(),"Effects:", screenWidth/2, 90, 0xFFFFFF - color);
+            int h = 90;
             for (int i = 0; i < specialState.size(); i++) {
                 h += 10;
-                drawString(new PoseStack(),getFont(),specialState.get(i) + attr.knowledge, screenWidth/2, h, color);
+                drawString(new PoseStack(),getFont(),specialState.get(i), screenWidth/2, h, color);
             }
         }
         if(currentColor == Color.R){
@@ -91,10 +92,13 @@ public class HUDAttributes extends Gui {
 
     @SubscribeEvent
     public static void onHUDRender(RenderGameOverlayEvent event){
-        if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
+        if (Minecraft.getInstance().player == null) {
+            Game.isStarted = false;
+            HUDSelectSkill.skills.clear();
+            HUDSelectSkill.selectIndex = null;
             return;
         }
-        if (Minecraft.getInstance().player == null) {
+        if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
         if(!Game.isStarted){

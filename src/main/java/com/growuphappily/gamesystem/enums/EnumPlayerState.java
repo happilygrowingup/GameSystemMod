@@ -5,5 +5,6 @@ public enum EnumPlayerState {
     SOUL_BROKEN(),
     CAN_NOT_SELECT(),
     INFO_OVERLOADED(),
-    OVERLOADED()
+    OVERLOADED(),
+    HUNTING()
 }

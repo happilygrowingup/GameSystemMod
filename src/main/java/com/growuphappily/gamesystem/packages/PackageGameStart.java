@@ -1,11 +1,13 @@
 package com.growuphappily.gamesystem.packages;
 
 import com.growuphappily.gamesystem.enums.EnumGameMode;
+import com.growuphappily.gamesystem.gui.HUDSelectSkill;
 import com.growuphappily.gamesystem.system.Game;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class PackageGameStart {
@@ -25,6 +27,9 @@ public class PackageGameStart {
     public void handler(Supplier<NetworkEvent.Context> ctx){
         ctx.get().enqueueWork(() -> {
             Game.isStarted = message;
+            if(!Game.isStarted){
+                HUDSelectSkill.skills = new ArrayList<>();
+            }
         });
         ctx.get().setPacketHandled(true);
     }
