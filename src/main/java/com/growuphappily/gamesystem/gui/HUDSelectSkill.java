@@ -16,6 +16,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.util.IndexedReadOnlyStringMap;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -50,7 +51,9 @@ public class HUDSelectSkill extends Gui {
             return;
         }
         if(!KeySelectAbility.isDown && selectIndex != null){
-            Networking.INSTANCE.sendToServer(new PackageSkills(skills.get(selectIndex)));
+            try {
+                Networking.INSTANCE.sendToServer(new PackageSkills(skills.get(selectIndex)));
+            }catch(IndexOutOfBoundsException ignored){}
             selectIndex = null;
             return;
         }

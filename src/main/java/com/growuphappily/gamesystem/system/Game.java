@@ -30,7 +30,7 @@ import org.apache.logging.log4j.LogManager;
 import java.util.*;
 
 @Mod.EventBusSubscriber
-public class Game extends Thread{
+public class Game{
     private static final boolean DEBUG = false;
     public EnumGameMode gameMode;
     public ArrayList<GamePlayer> players = new ArrayList<>();
@@ -42,6 +42,7 @@ public class Game extends Thread{
     private static long lastTime = 0;
     public static EnumGameStage stage;
     public static EnumRules rule;
+    public static long lastThree = 0;
     public Game(EnumGameMode gameMode){
         instance = this;
         isStarted = false;
@@ -141,6 +142,12 @@ public class Game extends Thread{
                             player.blood += player.attributes.getMaxBlood() * 0.01;
                         }
                     }
+                    if(player.blood < player.attributes.getMaxBlood()*0.1f && !player.state.contains(EnumPlayerState.SOUL_BROKEN)){
+                        player.state.add(EnumPlayerState.SOUL_BROKEN);
+                    }
+                    if (player.blood >= player.attributes.getMaxBlood()*0.1f && !EffectBrokenSoul.affectedPlayers.contains(player)){
+                        player.state.remove(EnumPlayerState.SOUL_BROKEN);
+                    }
                     // Update client attributes display
                     if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){
                         Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageAttribute(
@@ -188,6 +195,21 @@ public class Game extends Thread{
                     Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackagePlayerState(str.toString()));
                 }
                 lastTime = new Date().getTime();
+            }
+            if(lastThree + 3000 <= new Date().getTime()){
+                for (int i = 0; i < instance.players.size(); i++) {
+                    GamePlayer player = instance.players.get(i);
+                    if(!player.isEvil && player.attributes.surgical != 0){
+                        if(player.attributes.surgical <= player.attributes.getMaxSurgical()*0.25f){
+                            player.attributes.surgical += player.attributes.mental*0.06f;
+                        }else if (player.attributes.surgical > player.attributes.getMaxSurgical()*0.25f && player.attributes.surgical <= player.attributes.getMaxSurgical()*0.7){
+                            player.attributes.surgical += player.attributes.mental*0.08f;
+                        }else{
+                            player.attributes.surgical += player.attributes.mental*0.1f;
+                        }
+                    }
+                }
+                lastThree = new Date().getTime();
             }
             for (int j = 0; j < Game.instance.humans.size(); j++) {
                 GamePlayer human = Game.instance.humans.get(j);
