@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-public class GUIOptionalSkill extends Screen {
-
-    public GUIOptionalSkill(Component p_96550_) {
+public class GUISelectSkill extends Screen {
+    public static final String[] availableSkills = {""};
+    public GUISelectSkill(Component p_96550_) {
         super(p_96550_);
     }
 

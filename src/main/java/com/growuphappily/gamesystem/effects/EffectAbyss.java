@@ -6,16 +6,13 @@ import com.growuphappily.gamesystem.system.GamePlayer;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class EffectDeepVally {
+public class EffectAbyss {
     public static final int ID = 3;
     public static final String message = "Deep Vally";
     public static ArrayList<GamePlayer> affectedPlayers = new ArrayList<>();

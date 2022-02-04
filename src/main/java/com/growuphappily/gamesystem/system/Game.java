@@ -5,13 +5,11 @@ import com.growuphappily.gamesystem.enums.EnumGameMode;
 import com.growuphappily.gamesystem.enums.EnumGameStage;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
 import com.growuphappily.gamesystem.enums.EnumRules;
-import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import com.growuphappily.gamesystem.packages.Networking;
 import com.growuphappily.gamesystem.packages.PackageAttribute;
 import com.growuphappily.gamesystem.packages.PackageGameStart;
 import com.growuphappily.gamesystem.packages.PackagePlayerState;
 import com.growuphappily.gamesystem.rules.RuleBloodFeast;
-import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
@@ -25,7 +23,6 @@ import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.*;
 
@@ -83,8 +80,9 @@ public class Game{
     }
 
     public void start(){
-        if(isReady()) {
+        if(!isReady()) {
             broadcast("Game is not ready!");
+            return;
         }
         Game.isStarted = true;
         for(GamePlayer player : players){
@@ -181,7 +179,7 @@ public class Game{
                     if(player.state.contains(EnumPlayerState.CAN_NOT_SELECT)){msg.add(EffectCanNotSelect.message);}
                     if(player.state.contains(EnumPlayerState.INFO_OVERLOADED)){msg.add(EffectInfoOverloaded.message);}
                     if(player.state.contains(EnumPlayerState.OVERLOADED)){msg.add("Overloaded");}
-                    if(EffectDeepVally.affectedPlayers.contains(player)){msg.add(EffectDeepVally.message);}
+                    if(EffectAbyss.affectedPlayers.contains(player)){msg.add(EffectAbyss.message);}
                     if(EffectPoisoned.affectedPlayers.contains(player)){msg.add(EffectBrokenSoul.message);}
                     if(player.state.contains(EnumPlayerState.HUNTING)){msg.add("Hunting");}
                     StringBuilder str = new StringBuilder();
@@ -306,6 +304,7 @@ public class Game{
             Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageGameStart(false));
         }
         Game.stage = null;
+        Game.rule = null;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -329,6 +328,9 @@ public class Game{
             if (player.attributes == null){
                 return false;
             }
+        }
+        if(Game.instance.evil.attributes == null){
+            return false;
         }
         return Game.rule != null;
     }

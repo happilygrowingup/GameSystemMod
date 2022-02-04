@@ -78,11 +78,6 @@ public class GUISelectAttribute extends Screen {
             knowledge += 10;
             points -= 10;
         });
-        Bsurgical = new Button(width / 2 - 15, height/2 + 35, 10, 10, new TextComponent("+"), (button) -> {
-            if(surgical >= 60){surgical=60;return;}
-            surgical += 10;
-            points -= 10;
-        });
         super.init();
         addRenderableWidget(Bspeed);
         addRenderableWidget(Bhealth);
@@ -91,7 +86,6 @@ public class GUISelectAttribute extends Screen {
         addRenderableWidget(Bmental);
         addRenderableWidget(BIQ);
         addRenderableWidget(Bknowledge);
-        addRenderableWidget(Bsurgical);
     }
 
     @Override
@@ -105,7 +99,6 @@ public class GUISelectAttribute extends Screen {
         drawString(p_96562_, this.font, "mental:" + mental, width / 2 + 20, height/2 + 5, 0xFFFFFF);
         drawString(p_96562_, this.font, "IQ:" + IQ, width / 2 + 20, height/2 + 15, 0xFFFFFF);
         drawString(p_96562_, this.font, "knowledge:" + knowledge, width / 2 + 20, height/2 + 25, 0xFFFFFF);
-        drawString(p_96562_, this.font, "Surgical:" + surgical, width / 2 + 20, height/2 + 35, 0xFFFFFF);
         Bspeed.render(p_96562_, p_96563_, p_96564_, p_96565_);
         Bhealth.render(p_96562_, p_96563_, p_96564_, p_96565_);
         Bstrength.render(p_96562_, p_96563_, p_96564_, p_96565_);
@@ -115,13 +108,13 @@ public class GUISelectAttribute extends Screen {
         Bknowledge.render(p_96562_, p_96563_, p_96564_, p_96565_);
         Bsurgical.render(p_96562_, p_96563_, p_96564_, p_96565_);
         super.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        if(points == 0){
+        if(points <= 0){
             endSelecting();
         }
     }
 
     public void endSelecting(){
-        Minecraft.getInstance().setScreen(null); //TODO: Switch to skill elect screen
+        Minecraft.getInstance().setScreen(new GUISelectSkill(new TextComponent("Select your skill..")));
         assert Minecraft.getInstance().player != null;
         Networking.INSTANCE.sendToServer(new PackageAttribute(
                 speed + "." +

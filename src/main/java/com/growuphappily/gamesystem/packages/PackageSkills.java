@@ -3,6 +3,7 @@ package com.growuphappily.gamesystem.packages;
 import com.growuphappily.gamesystem.gui.HUDSelectSkill;
 import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import com.growuphappily.gamesystem.system.Game;
+import com.growuphappily.gamesystem.system.GamePlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +35,7 @@ public class PackageSkills {
                     LogManager.getLogger().info(skill);
                     LogManager.getLogger().info(skill.lastIndexOf("."));
                     Class<?> skillClass = Class.forName(skill);
-                    skillClass.getMethod("run").invoke(skillClass.getConstructors()[0].newInstance((Object) null));
+                    skillClass.getMethod("preRun", GamePlayer.class).invoke(skillClass.getConstructors()[0].newInstance(), Game.instance.searchPlayerByName(ctx.get().getSender().getDisplayName().getString()));
                 } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
                     e.printStackTrace();
                 }

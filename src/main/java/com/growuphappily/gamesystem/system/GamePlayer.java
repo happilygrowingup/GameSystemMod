@@ -4,6 +4,8 @@ package com.growuphappily.gamesystem.system;
 import com.growuphappily.gamesystem.enums.EnumAttackResult;
 import com.growuphappily.gamesystem.enums.EnumCastResult;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
+import com.growuphappily.gamesystem.eventsystem.AttackEvent;
+import com.growuphappily.gamesystem.eventsystem.EventHandler;
 import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
@@ -85,6 +87,9 @@ public class GamePlayer {
             GamePlayer beingAttacked = Game.instance.searchPlayerByName(event.getTarget().getDisplayName().getString());
             if(beingAttacked != null){
                 event.setCanceled(true);
+                if(EventHandler.post(new AttackEvent(player, beingAttacked))){
+                    return;
+                }
                 if(player.lastAttack + (long)(1/player.attributes.getAttackSpeed())*1000 > new Date().getTime()){
                     LogManager.getLogger().info(player.playerInstance.getDisplayName().getString() + "'s attack is Cold!");
                     player.playerInstance.sendMessage(new TextComponent("Colding!"), ChatType.SYSTEM, Util.NIL_UUID);

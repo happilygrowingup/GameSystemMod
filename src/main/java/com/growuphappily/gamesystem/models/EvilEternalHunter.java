@@ -83,10 +83,10 @@ public class EvilEternalHunter extends GamePlayer {
                             trapped = true;
                             if((double)Dice.onedX(10) >= human.attributes.IQ*0.03 + human.attributes.knowledge * 0.05){
                                 EffectPoisoned.addPlayer(human, 5);
-                                human.playerInstance.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,1000,2));
-                                human.playerInstance.addEffect(new MobEffectInstance(MobEffects.GLOWING,300));
+                                human.playerInstance.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,0x100,1));
+                                human.playerInstance.addEffect(new MobEffectInstance(MobEffects.GLOWING,0x30, 0));
                             }else{
-                                human.playerInstance.addEffect(new MobEffectInstance(MobEffects.GLOWING,200));
+                                human.playerInstance.addEffect(new MobEffectInstance(MobEffects.GLOWING,200, 0));
                             }
                         }
                     }

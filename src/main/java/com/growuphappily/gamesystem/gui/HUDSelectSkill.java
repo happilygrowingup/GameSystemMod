@@ -72,7 +72,7 @@ public class HUDSelectSkill extends Gui {
             if(selectIndex == null){
                 selectIndex = 0;
             }
-            if(selectIndex + 1 >= skills.size()){
+            if(selectIndex + delta >= skills.size()){
                 selectIndex = skills.size() -1;
             }
             else if(selectIndex < 0){
