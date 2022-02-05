@@ -2,5 +2,6 @@
   "key.message": "Ability Select Key",
   "key.category.ability": "Game System",
   "com.growuphappily.gamesystem.skills.SkillPlaceTrap": "Place Trap",
-  "com.growuphappily.gamesystem.skills.SkillStartHunt": "Start Hunt Mode"
+  "com.growuphappily.gamesystem.skills.SkillStartHunt": "Start Hunt Mode",
+  "block.gamesystem.surgical_point": "Surgical Point(Right click to place)"
 }

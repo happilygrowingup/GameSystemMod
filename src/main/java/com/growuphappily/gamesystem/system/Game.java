@@ -10,16 +10,24 @@ import com.growuphappily.gamesystem.packages.PackageAttribute;
 import com.growuphappily.gamesystem.packages.PackageGameStart;
 import com.growuphappily.gamesystem.packages.PackagePlayerState;
 import com.growuphappily.gamesystem.rules.RuleBloodFeast;
+import com.growuphappily.gamesystem.world.block.BlockSurgicalPoint;
+import com.growuphappily.gamesystem.world.item.ItemRegistry;
 import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -40,6 +48,8 @@ public class Game{
     public static EnumGameStage stage;
     public static EnumRules rule;
     public static long lastThree = 0;
+    public ArrayList<BlockPos> points;
+    public ServerLevel world;
     public Game(EnumGameMode gameMode){
         instance = this;
         isStarted = false;
@@ -58,7 +68,8 @@ public class Game{
         for (GamePlayer human:humans) {
             human.playerInstance.sendMessage(new TextComponent("Your identity is human. Select your Attributes and factions."), ChatType.SYSTEM, Util.NIL_UUID);
         }
-        evil.playerInstance.sendMessage(new TextComponent("Your identity is evil. Select distorted rules"), ChatType.SYSTEM, Util.NIL_UUID);
+        evil.playerInstance.sendMessage(new TextComponent("Your identity is evil. Select distorted rules, place surgical points."), ChatType.SYSTEM, Util.NIL_UUID);
+        evil.playerInstance.getInventory().add(4, new ItemStack(ItemRegistry.surgicalPoint.get()));
     }
 
     public void addPlayerAttributes(ServerPlayer p, Attributes attributes){
@@ -272,6 +283,11 @@ public class Game{
                 broadcast("Evil win!");
                 gameOver();
             }
+            for (int i = 0; i < Game.instance.points.size(); i++) {
+                if(Game.instance.world.getBlockState(Game.instance.points.get(i)).isAir()){
+
+                }
+            }
         }
     }
 
@@ -332,6 +348,16 @@ public class Game{
         if(Game.instance.evil.attributes == null){
             return false;
         }
+        if(Game.instance.points.size() < 4){
+            return false;
+        }
         return Game.rule != null;
+    }
+
+    @SubscribeEvent
+    public static void onBlockPlace(BlockEvent.EntityPlaceEvent event){
+        if(event.getPlacedBlock().getBlock() instanceof BlockSurgicalPoint && !Game.isStarted && Game.instance.points.size() <= 4){
+            Game.instance.points.add(event.getPos());
+        }
     }
 }

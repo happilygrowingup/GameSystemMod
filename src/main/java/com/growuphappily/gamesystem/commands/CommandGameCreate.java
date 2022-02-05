@@ -22,6 +22,7 @@ public class CommandGameCreate implements Command<CommandSourceStack> {
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         Game.server = context.getSource().getServer();
+        Game.instance.world = context.getSource().getLevel();
         if(Game.server.getPlayerCount() < 2){
             context.getSource().sendFailure(new TextComponent("Player not enough! I need 2 players at least."));
             return 0;
