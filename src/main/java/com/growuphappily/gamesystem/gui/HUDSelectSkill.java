@@ -67,7 +67,7 @@ public class HUDSelectSkill extends Gui {
     public static void onMouseScroll(InputEvent.MouseScrollEvent event){
         if(KeySelectAbility.isDown){
             event.setCanceled(true);
-            double delta = event.getScrollDelta();
+            double delta = -event.getScrollDelta();
             LogManager.getLogger().info(delta);
             if(selectIndex == null){
                 selectIndex = 0;

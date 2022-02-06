@@ -68,7 +68,7 @@ public class Game{
             human.playerInstance.sendMessage(new TextComponent("Your identity is human. Select your Attributes and factions."), ChatType.SYSTEM, Util.NIL_UUID);
         }
         evil.playerInstance.sendMessage(new TextComponent("Your identity is evil. Select distorted rules, place surgical points."), ChatType.SYSTEM, Util.NIL_UUID);
-        evil.playerInstance.getInventory().add(4, new ItemStack(ItemRegistry.surgicalPoint.get()));
+        evil.playerInstance.getInventory().add(new ItemStack(ItemRegistry.surgicalPoint.get(), 4, null));
         points = new ArrayList<>();
     }
 

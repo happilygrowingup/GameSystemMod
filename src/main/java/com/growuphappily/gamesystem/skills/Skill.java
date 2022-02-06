@@ -16,27 +16,26 @@ public class Skill {
                 return true;
             }
         }
+        boolean ret = false;
         switch (player.tryCast()){
             case FAIL -> {
                 player.playerInstance.sendMessage(new TextComponent("Cast FAILED!"), ChatType.SYSTEM, Util.NIL_UUID);
                 player.attributes.surgical += consumption * (player.isEvil ? 1 : -1);
-                return true;
+                ret = true;
             }
             case SUCCESS -> {
                 player.playerInstance.sendMessage(new TextComponent("Cast SUCCEED!"), ChatType.SYSTEM, Util.NIL_UUID);
                 player.attributes.surgical += consumption * (player.isEvil ? 1 : -1);
-                return false;
             }
             case BIG_FAIL -> {
                 player.playerInstance.sendMessage(new TextComponent("Casting .. Shit, A BIG FAIL!"), ChatType.SYSTEM, Util.NIL_UUID);
                 player.attributes.surgical += consumption * 2 * (player.isEvil ? 1 : -1);
-                return true;
+                ret = true;
             }
             case BIG_SUCCESS -> {
                 player.playerInstance.sendMessage(new TextComponent("Casting .. A BIG SUCCESS!"), ChatType.SYSTEM, Util.NIL_UUID);
-                return false;
             }
         }
-        return true;
+        return ret;
     }
 }
