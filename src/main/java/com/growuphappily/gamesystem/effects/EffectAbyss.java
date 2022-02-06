@@ -6,6 +6,8 @@ import com.growuphappily.gamesystem.system.GamePlayer;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -19,11 +21,13 @@ public class EffectAbyss {
     public static ArrayList<Long> startTimes = new ArrayList<>();
     public static ArrayList<Integer> times = new ArrayList<>();
     public static long lastTime = 0;
+
     public void addPlayer(GamePlayer player, int time){
         affectedPlayers.add(player);
         player.attributes.health -= 5;
         player.attributes.speed -= 5;
         startTimes.add(new Date().getTime());
+        times.add(time);
         player.playerInstance.sendMessage(new TextComponent("You are infected by the Deep Vally..."), ChatType.SYSTEM, Util.NIL_UUID);
     }
 
@@ -39,6 +43,7 @@ public class EffectAbyss {
                     }else if((double)dice == player.attributes.mental*0.1){
                         player.attributes.mental -= 3;
                     }
+                    player.playerInstance.addEffect(new MobEffectInstance(MobEffects.WITHER, 20, 2));
                     if(startTimes.get(index) + (long) times.get(index) <= new Date().getTime()){
                         removePlayer(player);
                     }

@@ -22,12 +22,12 @@ public class CommandGameCreate implements Command<CommandSourceStack> {
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         Game.server = context.getSource().getServer();
-        Game.instance.world = context.getSource().getLevel();
         if(Game.server.getPlayerCount() < 2){
             context.getSource().sendFailure(new TextComponent("Player not enough! I need 2 players at least."));
             return 0;
         }
         new Game(EnumGameMode.MODE_NORMAL);
+        Game.instance.world = context.getSource().getLevel();
         context.getSource().sendSuccess(new TextComponent("Test"),false);
         for (ServerPlayer p:context.getSource().getServer().getPlayerList().getPlayers()) {
             if(Game.instance.searchPlayerByName(p.getDisplayName().getString()).isEvil) {

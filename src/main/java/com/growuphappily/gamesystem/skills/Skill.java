@@ -10,12 +10,7 @@ public class Skill {
     public int consumption;
     public EnumFactionCategory category;
     public boolean preRun(GamePlayer player){
-        if(player.isEvil){
-            if(player.attributes.surgical + consumption > player.attributes.maxtire){
-                player.playerInstance.sendMessage(new TextComponent("Failed to cast: you are too tired!"), ChatType.SYSTEM, Util.NIL_UUID);
-                return true;
-            }
-        }else{
+        if(!player.isEvil){
             if(player.attributes.surgical < consumption){
                 player.playerInstance.sendMessage(new TextComponent("Failed to cast: your surgical is not enough!"), ChatType.SYSTEM, Util.NIL_UUID);
                 return true;

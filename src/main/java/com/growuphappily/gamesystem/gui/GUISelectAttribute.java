@@ -106,7 +106,6 @@ public class GUISelectAttribute extends Screen {
         Bmental.render(p_96562_, p_96563_, p_96564_, p_96565_);
         BIQ.render(p_96562_, p_96563_, p_96564_, p_96565_);
         Bknowledge.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        Bsurgical.render(p_96562_, p_96563_, p_96564_, p_96565_);
         super.render(p_96562_, p_96563_, p_96564_, p_96565_);
         if(points <= 0){
             endSelecting();

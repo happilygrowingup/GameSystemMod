@@ -23,11 +23,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -48,8 +46,9 @@ public class Game{
     public static EnumGameStage stage;
     public static EnumRules rule;
     public static long lastThree = 0;
-    public ArrayList<BlockPos> points;
+    public ArrayList<BlockPos> points = new ArrayList<>();
     public ServerLevel world;
+    public long stage3StartTime;
     public Game(EnumGameMode gameMode){
         instance = this;
         isStarted = false;
@@ -70,6 +69,7 @@ public class Game{
         }
         evil.playerInstance.sendMessage(new TextComponent("Your identity is evil. Select distorted rules, place surgical points."), ChatType.SYSTEM, Util.NIL_UUID);
         evil.playerInstance.getInventory().add(4, new ItemStack(ItemRegistry.surgicalPoint.get()));
+        points = new ArrayList<>();
     }
 
     public void addPlayerAttributes(ServerPlayer p, Attributes attributes){
@@ -105,8 +105,14 @@ public class Game{
             Networking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player.playerInstance), new PackageGameStart(true));
         }
         evil.attributes.surgical = 0;
-        broadcast("Game Started!");
+        broadcast("Game Started with stage 1!");
         broadcast(evil.playerInstance.getDisplayName().getString() + " is EVIL!!BE CAREFUL!!");
+        evil.attributes.speed -= 4;
+        evil.attributes.health += 40;
+        evil.attributes.strength += 5;
+        evil.attributes.defence += 10;
+        evil.attributes.maxtire += 40;
+        stage = EnumGameStage.STAGE_ONE;
     }
 
     @SubscribeEvent
@@ -224,6 +230,7 @@ public class Game{
                 GamePlayer human = Game.instance.humans.get(j);
                 if(!human.isSuperRegened && human.blood > (float)human.attributes.getMaxBlood()*0.1 && human.blood < (float) human.attributes.getMaxBlood()*0.5){
                     human.canSuperRegen = true;
+                    human.playerInstance.sendMessage(new TextComponent("[SYSTEM] You have gained a super regen"), ChatType.SYSTEM, Util.NIL_UUID);
                 }
             }
             // Set base value
@@ -283,10 +290,41 @@ public class Game{
                 broadcast("Evil win!");
                 gameOver();
             }
-            for (int i = 0; i < Game.instance.points.size(); i++) {
-                if(Game.instance.world.getBlockState(Game.instance.points.get(i)).isAir()){
-
+            if(stage == EnumGameStage.STAGE_THREE){
+                if(Game.instance.stage3StartTime + 240000 <= new Date().getTime()){
+                    broadcast("Human win!");
+                    gameOver();
                 }
+            }
+            //Check surgical point
+            if(stage == EnumGameStage.STAGE_ONE) {
+                for (int i = 0; i < Game.instance.points.size(); i++) {
+                    if (Game.instance.world.getBlockState(Game.instance.points.get(i)).isAir()) {
+                        broadcast("The surgical point at [" + Game.instance.points.get(i).toString() + "] have been destroyed!");
+                        Game.instance.evil.attributes.surgical += 50;
+                        if(Game.instance.points.size() == 1){
+                            broadcast("Game Stage 2");
+                            stage = EnumGameStage.STAGE_TWO;
+                            Game.instance.evil.attributes.speed += 4;
+                            Game.instance.evil.attributes.health -= 40;
+                            Game.instance.evil.attributes.strength -= 5;
+                            Game.instance.evil.attributes.defence -= 10;
+                            Game.instance.evil.attributes.maxtire -= 40;
+                        }
+                        Game.instance.points.remove(i);
+                        break;
+                    }
+                }
+            }
+            //Check stage 3
+            if(stage == EnumGameStage.STAGE_TWO && Game.instance.humans.size() == 1){
+                Game.instance.stage3StartTime = new Date().getTime();
+                broadcast("Game stage 3");
+                stage = EnumGameStage.STAGE_THREE;
+                Game.instance.evil.attributes.speed += 5;
+                Game.instance.evil.attributes.health += 40;
+                Game.instance.evil.attributes.strength += 5;
+                Game.instance.evil.attributes.defence += 10;
             }
         }
     }
