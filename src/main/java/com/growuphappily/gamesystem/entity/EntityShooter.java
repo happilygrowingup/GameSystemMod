@@ -4,30 +4,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 
-public class EntityShooter extends Entity {
-    public EntityShooter(EntityType<?> p_19870_, Level p_19871_) {
-        super(p_19870_, p_19871_);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag p_20052_) {
-
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag p_20139_) {
-
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return null;
+public class EntityShooter extends AbstractHurtingProjectile {
+    public EntityShooter(EntityType<? extends AbstractHurtingProjectile> p_36833_, Level p_36834_) {
+        super(p_36833_, p_36834_);
     }
 }

@@ -5,31 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Fix bugs">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBarrage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBigCheat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBlackHole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBlast.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillCoffinLock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillEvilInfect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillFateDisturb.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillFireAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillForAll.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillHeartShout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillInDark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillJusticeJudge.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillMakeFuture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillMoonAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillSmallCheat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillSoulChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillTreasonForce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ShooterRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/AttackSucceedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemConverseDice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemMotionDice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemSkillDice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/blank_dice.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/converse_dice.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/motion_dice.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/skill_dice.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/blank_dice_texture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/converse_dice_texture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/motion_dice_texture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/skill_dice_texture.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectSkill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDSelectSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDSelectSkill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillStartHunt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillStartHunt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelShooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/block/surgical_point_model.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/block/surgical_point_model.json" afterDir="false" />
     </list>
     <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +67,37 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="GameProject" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="documentation" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="forgegradle runs" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="help" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="ide" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -119,15 +146,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/block" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/block" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/block" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.runClient">
+  <component name="RunManager" selected="Gradle.GameProject [createSrgToMcp]">
     <configuration name="GameProject [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -140,6 +173,27 @@
         <option name="taskNames">
           <list>
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GameProject [createSrgToMcp]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="createSrgToMcp" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -220,9 +274,11 @@
       <item itemvalue="Gradle.GameProject [prepareRunClient]" />
       <item itemvalue="Gradle.GameProject [build]" />
       <item itemvalue="Gradle.GameProject [genEclipseRuns]" />
+      <item itemvalue="Gradle.GameProject [createSrgToMcp]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.GameProject [createSrgToMcp]" />
         <item itemvalue="Gradle.GameProject [build]" />
         <item itemvalue="Gradle.GameProject [genIntellijRuns]" />
         <item itemvalue="Gradle.GameProject [prepareRunClient]" />

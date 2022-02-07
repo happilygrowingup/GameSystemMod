@@ -5,6 +5,7 @@ import com.growuphappily.gamesystem.enums.EnumAttackResult;
 import com.growuphappily.gamesystem.enums.EnumCastResult;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
 import com.growuphappily.gamesystem.eventsystem.AttackEvent;
+import com.growuphappily.gamesystem.eventsystem.AttackSucceedEvent;
 import com.growuphappily.gamesystem.eventsystem.EventHandler;
 import com.growuphappily.gamesystem.models.EvilEternalHunter;
 import net.minecraft.Util;
@@ -46,10 +47,14 @@ public class GamePlayer {
         if((Dice.onedX(100) + this.attributes.speed*0.2) >= (20 + beingAttacked.attributes.speed*0.4)){
             beingAttacked.lastHurt = new Date().getTime();
             if(Dice.onedX(100) >= (Dice.onedX(100) + beingAttacked.attributes.defence - (attributes.strength * 0.1))){
-                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), (float) ((attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1)));
+                AttackSucceedEvent event = new AttackSucceedEvent(this, beingAttacked, (float) ((attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1)));
+                if(EventHandler.post(event)){return EnumAttackResult.CRITICAL;}
+                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage);
                 return EnumAttackResult.CRITICAL;
             }else {
-                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), (float) ((attributes.strength*0.1) + 5 - (beingAttacked.attributes.defence * 0.1)));
+                AttackSucceedEvent event = new AttackSucceedEvent(this, beingAttacked, (float) ((attributes.strength*0.1) + 5 - (beingAttacked.attributes.defence * 0.1)));
+                if(EventHandler.post(event)){return EnumAttackResult.NORMAL;}
+                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage);
                 return EnumAttackResult.NORMAL;
             }
         }else{

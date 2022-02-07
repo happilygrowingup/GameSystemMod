@@ -21,5 +21,9 @@
   "com.growuphappily.gamesystem.skills.SkillBigCheat": "Cheat: Big Cheat",
   "com.growuphappily.gamesystem.skills.SkillMakeFuture": "Prediction:MakeFuture",
   "com.growuphappily.gamesystem.skills.SkillFateDisturb": "Prediction:FateDisturb",
-  "com.growuphappily.gamesystem.skills.SkillHeartShout": "Heart: Heart Shout"
+  "com.growuphappily.gamesystem.skills.SkillHeartShout": "Heart: Heart Shout",
+  "item.gamesystem.blank_dice": "Blank Dice",
+  "item.gamesystem.motion_dice": "Motion Dice",
+  "item.gamesystem.skill_dice": "Skill Dice",
+  "item.gamesystem.converse_dice": "Converse Dice"
 }
