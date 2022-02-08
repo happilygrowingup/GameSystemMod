@@ -2,9 +2,12 @@ package com.growuphappily.gamesystem.gui;
 
 import com.growuphappily.gamesystem.system.Attributes;
 import com.growuphappily.gamesystem.system.Game;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -17,6 +20,7 @@ import java.util.Date;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber
 public class HUDAttributes extends Gui {
+    public static final ResourceLocation PRESSURE_BAR_TEXTURE = new ResourceLocation("gamesystem", "textures/gui/pressure_bar.png");
     public static Attributes attr = new Attributes(0,0,0,0,0,0,0,0);
     public static boolean isAttackInCold = false;
     public static int color = 0x0000FF;
@@ -24,6 +28,7 @@ public class HUDAttributes extends Gui {
     public static float g = 0;
     public static float b = 255;
     public static float deltaTime;
+    public static boolean isEvil = false;
     public static ArrayList<String> specialState = new ArrayList<>();
     private enum Color{
         R(),
@@ -38,7 +43,13 @@ public class HUDAttributes extends Gui {
     }
 
     public void render() {
-        drawString(new PoseStack(),getFont(),"Tire(Surgical):" + attr.surgical, screenWidth/2, 10, color);
+        drawString(new PoseStack(),getFont(),"Tire(Surgical):" + (isEvil ? "" : attr.surgical), screenWidth/2, 10, color);
+        if(isEvil) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+            RenderSystem.setShaderTexture(0, PRESSURE_BAR_TEXTURE);
+        }
+        blit(new PoseStack(), 75, 10, 0, 0, (int)(attr.surgical/200*150), 10);
         drawString(new PoseStack(),getFont(),"speed:" + attr.speed, screenWidth/2, 20, color);
         drawString(new PoseStack(),getFont(),"health:" + attr.health, screenWidth/2, 30, color);
         drawString(new PoseStack(),getFont(),"strength:" + attr.strength, screenWidth/2, 40, color);

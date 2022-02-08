@@ -1,6 +1,7 @@
 package com.growuphappily.gamesystem.skills;
 
 import com.growuphappily.gamesystem.enums.EnumFactionCategory;
+import com.growuphappily.gamesystem.enums.EnumPlayerState;
 import com.growuphappily.gamesystem.system.GamePlayer;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ChatType;
@@ -14,6 +15,10 @@ public class Skill {
             if(player.attributes.surgical < consumption){
                 player.playerInstance.sendMessage(new TextComponent("Failed to cast: your surgical is not enough!"), ChatType.SYSTEM, Util.NIL_UUID);
                 return true;
+            }
+        }else{
+            if(player.state.contains(EnumPlayerState.OVERLOADED)){
+                player.playerInstance.sendMessage(new TextComponent("Faild to cast: You are overloaded!"), ChatType.SYSTEM, Util.NIL_UUID);
             }
         }
         boolean ret = false;

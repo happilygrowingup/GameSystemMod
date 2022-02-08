@@ -5,28 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Fix bugs">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityRenderRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityTypeRegistry.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ShooterRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/AttackSucceedEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemConverseDice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemMotionDice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemSkillDice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/blank_dice.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/converse_dice.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/motion_dice.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/skill_dice.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/blank_dice_texture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/converse_dice_texture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/motion_dice_texture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/skill_dice_texture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity/shooter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/gui/pressure_bar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/GameSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/GameSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelShooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/block/surgical_point_model.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/block/surgical_point_model.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageOpenGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageOpenGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageSkills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageSkills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" afterDir="false" />
     </list>
     <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,6 +91,18 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="other" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="GameProject" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -146,11 +150,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/gui" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/gui" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/block" />
@@ -160,7 +166,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.GameProject [createSrgToMcp]">
+  <component name="RunManager" selected="Application.runClient">
     <configuration name="GameProject [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -203,27 +209,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="GameProject [genEclipseRuns]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="genEclipseRuns" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="GameProject [genIntellijRuns]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -236,6 +221,27 @@
         <option name="taskNames">
           <list>
             <option value="genIntellijRuns" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GameProject [hideOfficialWarningUntilChanged]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="hideOfficialWarningUntilChanged" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -273,16 +279,16 @@
       <item itemvalue="Gradle.GameProject [genIntellijRuns]" />
       <item itemvalue="Gradle.GameProject [prepareRunClient]" />
       <item itemvalue="Gradle.GameProject [build]" />
-      <item itemvalue="Gradle.GameProject [genEclipseRuns]" />
       <item itemvalue="Gradle.GameProject [createSrgToMcp]" />
+      <item itemvalue="Gradle.GameProject [hideOfficialWarningUntilChanged]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.GameProject [hideOfficialWarningUntilChanged]" />
         <item itemvalue="Gradle.GameProject [createSrgToMcp]" />
         <item itemvalue="Gradle.GameProject [build]" />
         <item itemvalue="Gradle.GameProject [genIntellijRuns]" />
         <item itemvalue="Gradle.GameProject [prepareRunClient]" />
-        <item itemvalue="Gradle.GameProject [genEclipseRuns]" />
       </list>
     </recent_temporary>
   </component>
@@ -417,6 +423,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fix bugs" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="player.lastHurt" language="JAVA" />

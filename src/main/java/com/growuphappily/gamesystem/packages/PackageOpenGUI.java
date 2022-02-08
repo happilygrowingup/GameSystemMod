@@ -2,6 +2,7 @@ package com.growuphappily.gamesystem.packages;
 
 import com.growuphappily.gamesystem.gui.GUISelectAttribute;
 import com.growuphappily.gamesystem.gui.GUISelectEvil;
+import com.growuphappily.gamesystem.gui.HUDAttributes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketDecoder;
@@ -41,11 +42,12 @@ public class PackageOpenGUI {
     }
     @OnlyIn(Dist.CLIENT)
     public void execute(){
-        //Code for open client gui
         if (Objects.equals(message, "Attr")) {
+            HUDAttributes.isEvil = false;
             Minecraft.getInstance().setScreen(new GUISelectAttribute(new TextComponent("Title")));
         }
         if (Objects.equals(message, "Evil")){
+            HUDAttributes.isEvil = true;
             Minecraft.getInstance().setScreen(new GUISelectEvil(new TextComponent("Title")));
         }
     }
