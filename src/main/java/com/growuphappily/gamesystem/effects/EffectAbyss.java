@@ -33,19 +33,25 @@ public class EffectAbyss {
 
     @SubscribeEvent
     public static void onTick(TickEvent.ServerTickEvent event){
-        if(Game.isStarted) {
-            if(lastTime + (long)1000 <= new Date().getTime()) {
-                for (GamePlayer player : affectedPlayers) {
-                    int dice = Dice.onedX(6);
-                    int index = affectedPlayers.indexOf(player);
-                    if((double)dice > player.attributes.mental*0.1){
-                        times.set(index, times.get(index) + 2);
-                    }else if((double)dice == player.attributes.mental*0.1){
-                        player.attributes.mental -= 3;
-                    }
-                    player.playerInstance.addEffect(new MobEffectInstance(MobEffects.WITHER, 20, 2));
-                    if(startTimes.get(index) + (long) times.get(index) <= new Date().getTime()){
-                        removePlayer(player);
+        for (int k = 0; k < Game.instances.size(); k++) {
+            Game game = Game.instances.get(k);
+            if (game.isStarted) {
+                if (lastTime + (long) 1000 <= new Date().getTime()) {
+                    for (GamePlayer player : affectedPlayers) {
+                        if(Game.getGameByPlayerName(player.playerInstance.getDisplayName().getString()) != game){
+                            return;
+                        }
+                        int dice = Dice.onedX(6);
+                        int index = affectedPlayers.indexOf(player);
+                        if ((double) dice > player.attributes.mental * 0.1) {
+                            times.set(index, times.get(index) + 2);
+                        } else if ((double) dice == player.attributes.mental * 0.1) {
+                            player.attributes.mental -= 3;
+                        }
+                        player.playerInstance.addEffect(new MobEffectInstance(MobEffects.WITHER, 20, 2));
+                        if (startTimes.get(index) + (long) times.get(index) <= new Date().getTime()) {
+                            removePlayer(player);
+                        }
                     }
                 }
             }

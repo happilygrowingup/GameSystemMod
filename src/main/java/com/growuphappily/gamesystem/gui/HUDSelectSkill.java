@@ -47,7 +47,7 @@ public class HUDSelectSkill extends Gui {
         if (Minecraft.getInstance().player == null) {
             return;
         }
-        if(!Game.isStarted){
+        if(!Game.clientIsStarted){
             return;
         }
         if(!KeySelectAbility.isDown && selectIndex != null){

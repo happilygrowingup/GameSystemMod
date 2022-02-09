@@ -4,21 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Fix bugs">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityRenderRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityTypeRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ShooterRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity/shooter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/gui/pressure_bar.png" afterDir="false" />
+    <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Added pressure bar for evil&#10;Added shooter entity&#10;Fix bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/GameSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/GameSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelShooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameKill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameKill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandGameStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandReg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/commands/CommandReg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectAbyss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectAbyss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectPoisoned.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectPoisoned.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDAttributes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageOpenGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageOpenGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDSelectSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/HUDSelectSkill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/models/EvilEternalHunter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/models/EvilEternalHunter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageEvil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageEvil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageGameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageGameStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageSkills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageSkills.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillPlaceTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillPlaceTrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillStartHunt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillStartHunt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
     </list>
     <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,8 +140,14 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.0.59_mapped_official_1.18.1/forge-1.18.1-39.0.59_mapped_official_1.18.1-sources.jar!/net/minecraft/server/commands/KillCommand.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="24JFMOaZNXh3Xc0fCvpcbbajIMK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -392,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644128613448</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added pressure bar for evil&#10;Added shooter entity&#10;Fix bugs">
+      <created>1644330650480</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1644330650480</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,18 +439,10 @@
     <MESSAGE value="Fix bugs&#10;Finish updated framework" />
     <MESSAGE value="Add block &amp;points" />
     <MESSAGE value="Fix bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs" />
+    <MESSAGE value="Added pressure bar for evil&#10;Added shooter entity&#10;Fix bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added pressure bar for evil&#10;Added shooter entity&#10;Fix bugs" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="player.lastHurt" language="JAVA" />

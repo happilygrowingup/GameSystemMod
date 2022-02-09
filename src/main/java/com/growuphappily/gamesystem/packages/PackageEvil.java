@@ -11,22 +11,20 @@ import java.util.function.Supplier;
 public class PackageEvil {
     public int message;
 
-    public PackageEvil(FriendlyByteBuf buf){
+    public PackageEvil(FriendlyByteBuf buf) {
         message = buf.readInt();
     }
 
-    public PackageEvil(int message){
+    public PackageEvil(int message) {
         this.message = message;
     }
 
-    public void toBytes(FriendlyByteBuf buf){
+    public void toBytes(FriendlyByteBuf buf) {
         buf.writeInt(message);
     }
 
-    public void handler(Supplier<NetworkEvent.Context> ctx){
-        ctx.get().enqueueWork(() -> {
-            Game.instance.addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(message, ctx.get().getSender())));
-        });
+    public void handler(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> Objects.requireNonNull(Game.getGameByPlayerName(Objects.requireNonNull(ctx.get().getSender()).getDisplayName().getString())).addEvil(Objects.requireNonNull(GamePlayer.getEvilWithID(message, ctx.get().getSender()))));
         ctx.get().setPacketHandled(true);
     }
 }

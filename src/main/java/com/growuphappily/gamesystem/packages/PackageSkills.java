@@ -30,12 +30,12 @@ public class PackageSkills {
 
     public void handler(Supplier<NetworkEvent.Context> ctx){
         ctx.get().enqueueWork(() -> {
-            if (Game.instance != null){
+            if (ctx.get().getDirection().getOriginationSide().isClient()){
                 try {
                     LogManager.getLogger().info(skill);
                     LogManager.getLogger().info(skill.lastIndexOf("."));
                     Class<?> skillClass = Class.forName(skill);
-                    skillClass.getMethod("run", GamePlayer.class).invoke(skillClass.getConstructors()[0].newInstance(), Game.instance.searchPlayerByName(ctx.get().getSender().getDisplayName().getString()));
+                    skillClass.getMethod("run", GamePlayer.class).invoke(skillClass.getConstructors()[0].newInstance(), Objects.requireNonNull(Game.getGameByPlayerName(Objects.requireNonNull(ctx.get().getSender()).getDisplayName().getString())).searchPlayerByName(Objects.requireNonNull(ctx.get().getSender()).getDisplayName().getString()));
                 } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
                     e.printStackTrace();
                 }

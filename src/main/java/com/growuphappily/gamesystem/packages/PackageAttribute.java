@@ -48,19 +48,21 @@ public class PackageAttribute {
                 HUDAttributes.isAttackInCold = Boolean.getBoolean(a[8]);
             }else {
                 String[] a = message.split("\\.");
-                Game.instance.addPlayerAttributes(
-                        Objects.requireNonNull(ctx.get().getSender()),
-                        new Attributes(
-                                Integer.parseInt(a[0]),
-                                Integer.parseInt(a[1]),
-                                Integer.parseInt(a[2]),
-                                Integer.parseInt(a[3]),
-                                Integer.parseInt(a[4]),
-                                Integer.parseInt(a[5]),
-                                Integer.parseInt(a[6]),
-                                Integer.parseInt(a[7])
-                        )
-                );
+                try {
+                    Objects.requireNonNull(Game.getGameByPlayerName(Objects.requireNonNull(ctx.get().getSender()).getDisplayName().getString())).addPlayerAttributes(
+                            Objects.requireNonNull(ctx.get().getSender()),
+                            new Attributes(
+                                    Integer.parseInt(a[0]),
+                                    Integer.parseInt(a[1]),
+                                    Integer.parseInt(a[2]),
+                                    Integer.parseInt(a[3]),
+                                    Integer.parseInt(a[4]),
+                                    Integer.parseInt(a[5]),
+                                    Integer.parseInt(a[6]),
+                                    Integer.parseInt(a[7])
+                            )
+                    );
+                }catch(NullPointerException ignored){}
             }
         });
         ctx.get().setPacketHandled(true);

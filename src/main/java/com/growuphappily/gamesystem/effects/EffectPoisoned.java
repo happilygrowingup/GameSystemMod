@@ -38,14 +38,20 @@ public class EffectPoisoned {
 
     @SubscribeEvent
     public static void onTick(TickEvent.ServerTickEvent event){
-        if(Game.isStarted) {
-            if(lastHurt + (long)1000 <= new Date().getTime()) {
-                for (int i = 0; i < affectedPlayers.size(); i++) {
-                    GamePlayer player = affectedPlayers.get(i);
-                    player.hurt(DamageSource.MAGIC, (float) (5 - player.attributes.defence * 0.1));
-                    player.blood -= (float) (5 - player.attributes.defence * 0.1);
+        for (int k = 0; k < Game.instances.size(); k++) {
+            Game game = Game.instances.get(k);
+            if (game.isStarted) {
+                if (lastHurt + (long) 1000 <= new Date().getTime()) {
+                    for (int i = 0; i < affectedPlayers.size(); i++) {
+                        GamePlayer player = affectedPlayers.get(i);
+                        if(Game.getGameByPlayerName(player.playerInstance.getDisplayName().getString()) != game){
+                            return;
+                        }
+                        player.hurt(DamageSource.MAGIC, (float) (5 - player.attributes.defence * 0.1));
+                        player.blood -= (float) (5 - player.attributes.defence * 0.1);
+                    }
+                    lastHurt = new Date().getTime();
                 }
-                lastHurt = new Date().getTime();
             }
         }
     }

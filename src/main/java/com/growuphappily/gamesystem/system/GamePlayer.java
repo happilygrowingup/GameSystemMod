@@ -87,35 +87,41 @@ public class GamePlayer {
     @SubscribeEvent
     public static void onPlayerAttack(AttackEntityEvent event){
         //LogManager.getLogger().info("Attack!");
-        if(Game.isStarted && Game.instance != null) {
-            GamePlayer player = Game.instance.searchPlayerByName(event.getPlayer().getDisplayName().getString());
-            GamePlayer beingAttacked = Game.instance.searchPlayerByName(event.getTarget().getDisplayName().getString());
-            if(beingAttacked != null){
-                event.setCanceled(true);
-                if(EventHandler.post(new AttackEvent(player, beingAttacked))){
-                    return;
-                }
-                if(player.lastAttack + (long)(1/player.attributes.getAttackSpeed())*1000 > new Date().getTime()){
-                    LogManager.getLogger().info(player.playerInstance.getDisplayName().getString() + "'s attack is Cold!");
-                    player.playerInstance.sendMessage(new TextComponent("Colding!"), ChatType.SYSTEM, Util.NIL_UUID);
-                    return;
-                }
-                EnumAttackResult result = player.Attack(beingAttacked);
-                player.lastAttack = new Date().getTime();
-                beingAttacked.lastHurt = player.lastAttack;
-                if(result == EnumAttackResult.CRITICAL){
-                    player.playerInstance.sendMessage(new TextComponent("CRITICAL!"), ChatType.SYSTEM, Util.NIL_UUID);
-                }else if(result == EnumAttackResult.MISSED){
-                    player.playerInstance.sendMessage(new TextComponent("MISSED!"), ChatType.SYSTEM, Util.NIL_UUID);
-                }
-                if(player.state.contains(EnumPlayerState.HUNTING)){
-                    int dice = Dice.onedX(100);
-                    if ((double)dice >= (double)5 + (double)beingAttacked.attributes.mental*0.1 + (double)beingAttacked.attributes.defence){
-                        beingAttacked.blood = 0;
-                        player.playerInstance.sendMessage(new TextComponent("HUNT KILL!"), ChatType.SYSTEM, Util.NIL_UUID);
-                        Game.broadcast("Evil killed " + beingAttacked.playerInstance.getDisplayName().getString() + " using hunting mode!!");
-                    }else{
-                        beingAttacked.playerInstance.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,5,1));
+        if(Game.instances == null){
+            return;
+        }
+        for (int k = 0; k <Game.instances.size(); k++) {
+            Game game = Game.instances.get(k);
+            if (game.isStarted) {
+                GamePlayer player = game.searchPlayerByName(event.getPlayer().getDisplayName().getString());
+                GamePlayer beingAttacked = game.searchPlayerByName(event.getTarget().getDisplayName().getString());
+                if (beingAttacked != null) {
+                    event.setCanceled(true);
+                    if (EventHandler.post(new AttackEvent(player, beingAttacked))) {
+                        return;
+                    }
+                    if (player.lastAttack + (long) (1 / player.attributes.getAttackSpeed()) * 1000 > new Date().getTime()) {
+                        LogManager.getLogger().info(player.playerInstance.getDisplayName().getString() + "'s attack is Cold!");
+                        player.playerInstance.sendMessage(new TextComponent("Colding!"), ChatType.SYSTEM, Util.NIL_UUID);
+                        return;
+                    }
+                    EnumAttackResult result = player.Attack(beingAttacked);
+                    player.lastAttack = new Date().getTime();
+                    beingAttacked.lastHurt = player.lastAttack;
+                    if (result == EnumAttackResult.CRITICAL) {
+                        player.playerInstance.sendMessage(new TextComponent("CRITICAL!"), ChatType.SYSTEM, Util.NIL_UUID);
+                    } else if (result == EnumAttackResult.MISSED) {
+                        player.playerInstance.sendMessage(new TextComponent("MISSED!"), ChatType.SYSTEM, Util.NIL_UUID);
+                    }
+                    if (player.state.contains(EnumPlayerState.HUNTING)) {
+                        int dice = Dice.onedX(100);
+                        if ((double) dice >= (double) 5 + (double) beingAttacked.attributes.mental * 0.1 + (double) beingAttacked.attributes.defence) {
+                            beingAttacked.blood = 0;
+                            player.playerInstance.sendMessage(new TextComponent("HUNT KILL!"), ChatType.SYSTEM, Util.NIL_UUID);
+                            game.broadcast("Evil killed " + beingAttacked.playerInstance.getDisplayName().getString() + " using hunting mode!!");
+                        } else {
+                            beingAttacked.playerInstance.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 1));
+                        }
                     }
                 }
             }

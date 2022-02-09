@@ -1,7 +1,6 @@
 package com.growuphappily.gamesystem.packages;
 
 import com.growuphappily.gamesystem.system.Game;
-import com.growuphappily.gamesystem.system.GamePlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -24,9 +23,7 @@ public class PackageRule {
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx){
-        ctx.get().enqueueWork(() -> {
-            Game.addRule(message);
-        });
+        ctx.get().enqueueWork(() -> Objects.requireNonNull(Game.getGameByPlayerName(Objects.requireNonNull(ctx.get().getSender()).getDisplayName().getString())).addRule(message));
         ctx.get().setPacketHandled(true);
     }
 }

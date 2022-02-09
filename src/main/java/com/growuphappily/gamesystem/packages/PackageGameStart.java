@@ -26,8 +26,8 @@ public class PackageGameStart {
 
     public void handler(Supplier<NetworkEvent.Context> ctx){
         ctx.get().enqueueWork(() -> {
-            Game.isStarted = message;
-            if(!Game.isStarted){
+            Game.clientIsStarted = message;
+            if(!Game.clientIsStarted){
                 HUDSelectSkill.skills = new ArrayList<>();
             }
         });
