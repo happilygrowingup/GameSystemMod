@@ -14,7 +14,7 @@ public class ItemBlankDice extends Item {
     public ItemBlankDice() {
         super(new Properties().tab(CreativeModeTab.TAB_COMBAT));
     }
-
+/*
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         if(!world.isClientSide) {
@@ -25,5 +25,5 @@ public class ItemBlankDice extends Item {
             shooter.moveTo(player.getEyePosition().add(player.getLookAngle()));
         }
         return InteractionResultHolder.success(player.getItemInHand(hand));
-    }
+    }*/
 }

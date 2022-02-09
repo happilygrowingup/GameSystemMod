@@ -139,4 +139,7 @@ public class GamePlayer {
         isSuperRegened = true;
     }
 
+    public void sendMessage(String msg){
+        playerInstance.sendMessage(new TextComponent(msg), ChatType.SYSTEM, Util.NIL_UUID);
+    }
 }

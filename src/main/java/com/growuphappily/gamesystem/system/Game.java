@@ -118,6 +118,15 @@ public class Game {
         evil.attributes.defence += 10;
         evil.attributes.maxtire += 40;
         stage = EnumGameStage.STAGE_ONE;
+        for (GamePlayer player : humans) {
+            player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.blankDice.get(), 3));
+        }
+        evil.playerInstance.getInventory().add(new ItemStack(ItemRegistry.blankDice.get(), 5));
+        for(GamePlayer player : players){
+            player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.motionDice.get(), (int)Math.floor(player.attributes.strength/20.)));
+            player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.skillDice.get(), (int)Math.floor(player.attributes.IQ/20.)));
+            player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.converseDice.get(), (int)Math.floor(player.attributes.knowledge/10.)));
+        }
     }
 
     @SubscribeEvent
