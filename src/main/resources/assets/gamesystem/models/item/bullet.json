@@ -1,6 +1,6 @@
 {
   "textures": {
-    "0": "item/bullet_texture"
+    "0": "gamesystem:item/bullet_texture"
   },
   "elements": [
     {

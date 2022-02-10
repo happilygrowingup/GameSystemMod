@@ -1,8 +1,9 @@
 package com.growuphappily.gamesystem.eventsystem;
 
 import com.growuphappily.gamesystem.system.GamePlayer;
+import net.minecraftforge.eventbus.api.Event;
 
-public class AttackSucceedEvent extends Event{
+public class AttackSucceedEvent extends Event {
     public GamePlayer player;
     public GamePlayer target;
     public float damage;

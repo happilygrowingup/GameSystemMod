@@ -1,6 +1,7 @@
 package com.growuphappily.gamesystem.eventsystem;
 
 import com.growuphappily.gamesystem.annotations.EventSubscribe;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+@Deprecated
 public class EventHandler {
 
     public static boolean post(Event event){
@@ -28,7 +30,9 @@ public class EventHandler {
                     }
                 }
             }
-        }catch (Exception ignored){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return event.isCancelled;
     }
 
@@ -39,6 +43,7 @@ public class EventHandler {
         Enumeration<URL> dirs;
         try {
             dirs = Thread.currentThread().getContextClassLoader().getResources(packageDirName);
+            LogManager.getLogger().info(dirs);
             while (dirs.hasMoreElements()) {
                 URL url = dirs.nextElement();
                 String protocol = url.getProtocol();

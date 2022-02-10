@@ -1,5 +1,6 @@
 package com.growuphappily.gamesystem.gui;
 
+import com.google.common.graph.Network;
 import com.growuphappily.gamesystem.packages.Networking;
 import com.growuphappily.gamesystem.packages.PackageAttribute;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,117 +15,97 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 @OnlyIn(Dist.CLIENT)
 public class GUISelectAttribute extends Screen {
     private final Logger logger = LogManager.getLogger();
     public int points = 250;
-    private int speed;
-    private int health;
-    private int strength;
-    private int defence;
-    private int mental;
-    private int IQ;
-    private int knowledge;
-    private int surgical;
-    private Button Bspeed;
-    private Button Bhealth;
-    private Button Bstrength;
-    private Button Bdefence;
-    private Button Bmental;
-    private Button BIQ;
-    private Button Bknowledge;
-    private Button Bsurgical;
-
+    public ArrayList<Integer> attrs = new ArrayList<>();
+    public static final String[] names = {"speed: ", "health: ", "strength: ", "defence: ", "mental: ", "IQ: ", "knowledge: "};
+    public ArrayList<Button> buttons = new ArrayList<>();
     public GUISelectAttribute(Component p_96550_) {
         super(p_96550_);
     }
+    public ArrayList<Integer> locks = new ArrayList<>();
+    public boolean canLock = true;
+    public int leftTime = 5;
 
     @Override
     protected void init() {
-        assert minecraft != null;
-        minecraft.keyboardHandler.setSendRepeatsToGui(true);
-        Bspeed = new Button(width / 2 - 15, height/2 - 35, 10, 10, new TextComponent("+"), (button) -> {
-            if(speed >= 60){speed=60;return;}
-            speed += 10;
-            points -= 10;
-        });
-        Bhealth = new Button(width / 2 - 15, height/2 - 25, 10, 10, new TextComponent("+"), (button) -> {
-            if(health >= 60){health=60;return;}
-            health += 10;
-            points -= 10;
-        });
-        Bstrength = new Button(width / 2 - 15, height/2 - 15, 10, 10, new TextComponent("+"), (button) -> {
-            if(strength >= 60){strength=60;return;}
-            strength += 10;
-            points -= 10;
-        });
-        Bdefence = new Button(width / 2 - 15, height/2 - 5, 10, 10, new TextComponent("+"), (button) -> {
-            if(defence >= 60){defence=60;return;}
-            defence += 10;
-            points -= 10;
-        });
-        Bmental = new Button(width / 2 - 15, height/2 + 5, 10, 10, new TextComponent("+"), (button) -> {
-            if(mental >= 60){mental=60;return;}
-            mental += 10;
-            points -= 10;
-        });
-        BIQ = new Button(width / 2 - 15, height/2 + 15, 10, 10, new TextComponent("+"), (button) -> {
-            if(IQ >= 60){IQ=60;return;}
-            IQ += 10;
-            points -= 10;
-        });
-        Bknowledge = new Button(width / 2 - 15, height/2 + 25, 10, 10, new TextComponent("+"), (button) -> {
-            if(knowledge >= 60){knowledge=60;return;}
-            knowledge += 10;
-            points -= 10;
-        });
-        super.init();
-        addRenderableWidget(Bspeed);
-        addRenderableWidget(Bhealth);
-        addRenderableWidget(Bstrength);
-        addRenderableWidget(Bdefence);
-        addRenderableWidget(Bmental);
-        addRenderableWidget(BIQ);
-        addRenderableWidget(Bknowledge);
+        for (int i = 0; i < 7; i++) {
+            attrs.add(0);
+            int finalI = i;
+            Button b = new Button(width / 2 - 25, height/2 - 35 + 10*i, 40, 10, new TextComponent("Lock"), (button)->{
+                if(!locks.contains(finalI) && canLock) {
+                    locks.add(finalI);
+                    button.setMessage(new TextComponent("Locked"));
+                }
+            });
+            buttons.add(b);
+            addRenderableWidget(b);
+        }
+        addRenderableWidget(new Button(width/2 - 50, height - 25, 100, 20, new TextComponent("Save"), (button) -> {
+            endSelecting();
+        }));
+        addRenderableWidget(new Button(width/2 - 50, height - 50, 100, 20, new TextComponent("Re-generate"), (button) -> {
+            genAttributes();
+            canLock = false;
+            for (Button b : buttons) {
+                if(b.getMessage().getString().equals("Lock")){
+                    b.visible = false;
+                }
+            }
+            --leftTime;
+            if(leftTime == 0){
+                button.visible = false;
+            }
+        }));
+        genAttributes();
     }
 
     @Override
-    public void render(@NotNull PoseStack p_96562_, int p_96563_, int p_96564_, float p_96565_) {
-        this.renderBackground(p_96562_);
-        drawString(p_96562_, this.font, "You have " + points + " points left.", width / 2 - 60, 50, 0xFFFFFF);
-        drawString(p_96562_, this.font, "speed:" + speed, width / 2 + 20, height/2 - 35, 0xFFFFFF);
-        drawString(p_96562_, this.font, "health:" + health, width / 2 + 20, height/2 - 25, 0xFFFFFF);
-        drawString(p_96562_, this.font, "strength:" + strength, width / 2 + 20, height/2 - 15, 0xFFFFFF);
-        drawString(p_96562_, this.font, "defence:" + defence, width / 2 + 20, height/2 - 5, 0xFFFFFF);
-        drawString(p_96562_, this.font, "mental:" + mental, width / 2 + 20, height/2 + 5, 0xFFFFFF);
-        drawString(p_96562_, this.font, "IQ:" + IQ, width / 2 + 20, height/2 + 15, 0xFFFFFF);
-        drawString(p_96562_, this.font, "knowledge:" + knowledge, width / 2 + 20, height/2 + 25, 0xFFFFFF);
-        Bspeed.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        Bhealth.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        Bstrength.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        Bdefence.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        Bmental.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        BIQ.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        Bknowledge.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        super.render(p_96562_, p_96563_, p_96564_, p_96565_);
-        if(points <= 0){
-            endSelecting();
+    public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float p_96565_) {
+        this.renderBackground(stack);
+        super.render(stack, mouseX, mouseY, p_96565_);
+        drawString(stack, this.font, "Generated Attributes:(Left random times: " + leftTime + ")", width / 2 - 60, 50, 0xFFFFFF);
+        for (int i = 0; i < 7; i++) {
+            drawString(stack, this.font, names[i] + attrs.get(i), width / 2 + 20, height/2 - 35 + i*10, 0xFFFFFF);
         }
     }
 
     public void endSelecting(){
         Minecraft.getInstance().setScreen(new GUISelectSkill(new TextComponent("Select your skill..")));
         assert Minecraft.getInstance().player != null;
-        Networking.INSTANCE.sendToServer(new PackageAttribute(
-                speed + "." +
-                health + "." +
-                strength + "." +
-                defence + "." +
-                mental + "." +
-                IQ + "." +
-                knowledge + "." +
-                surgical + "."
-        ));
+        StringBuilder msg = new StringBuilder();
+        for (int i : attrs) {
+            msg.append(i);
+            msg.append(".");
+        }
+        Networking.INSTANCE.sendToServer(new PackageAttribute(msg.toString()));
+    }
+
+    public void genAttributes(){
+        if(attrs.size() < 7){
+            return;
+        }
+        int points = 250;
+        for (int i : locks) {
+            points -= attrs.get(i);
+        }
+        for (int i = 0; i < attrs.size(); i++) {
+            if(locks.contains(i)){
+                continue;
+            }
+            int r = new Random().nextInt(10, 60);
+            points -= r;
+            attrs.set(i, r);
+            if(points < 0){
+                genAttributes();
+                return;
+            }
+        }
     }
 }
 

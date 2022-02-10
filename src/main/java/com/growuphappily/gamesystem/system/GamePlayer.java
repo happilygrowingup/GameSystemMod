@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -48,12 +49,12 @@ public class GamePlayer {
             beingAttacked.lastHurt = new Date().getTime();
             if(Dice.onedX(100) >= (Dice.onedX(100) + beingAttacked.attributes.defence - (attributes.strength * 0.1))){
                 AttackSucceedEvent event = new AttackSucceedEvent(this, beingAttacked, (float) ((attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1)));
-                if(EventHandler.post(event)){return EnumAttackResult.CRITICAL;}
+                if(MinecraftForge.EVENT_BUS.post(event)){return EnumAttackResult.CRITICAL;}
                 beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage);
                 return EnumAttackResult.CRITICAL;
             }else {
                 AttackSucceedEvent event = new AttackSucceedEvent(this, beingAttacked, (float) ((attributes.strength*0.1) + 5 - (beingAttacked.attributes.defence * 0.1)));
-                if(EventHandler.post(event)){return EnumAttackResult.NORMAL;}
+                if(MinecraftForge.EVENT_BUS.post(event)){return EnumAttackResult.NORMAL;}
                 beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage);
                 return EnumAttackResult.NORMAL;
             }
@@ -97,7 +98,7 @@ public class GamePlayer {
                 GamePlayer beingAttacked = game.searchPlayerByName(event.getTarget().getDisplayName().getString());
                 if (beingAttacked != null) {
                     event.setCanceled(true);
-                    if (EventHandler.post(new AttackEvent(player, beingAttacked))) {
+                    if (MinecraftForge.EVENT_BUS.post(new AttackEvent(player, beingAttacked))) {
                         return;
                     }
                     if (player.lastAttack + (long) (1 / player.attributes.getAttackSpeed()) * 1000 > new Date().getTime()) {

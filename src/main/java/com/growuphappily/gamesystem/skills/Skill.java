@@ -18,7 +18,7 @@ public class Skill {
             }
         }else{
             if(player.state.contains(EnumPlayerState.OVERLOADED)){
-                player.playerInstance.sendMessage(new TextComponent("Faild to cast: You are overloaded!"), ChatType.SYSTEM, Util.NIL_UUID);
+                player.playerInstance.sendMessage(new TextComponent("Failed to cast: You are overloaded!"), ChatType.SYSTEM, Util.NIL_UUID);
             }
         }
         boolean ret = false;

@@ -59,7 +59,7 @@ public class PackageAttribute {
                                     Integer.parseInt(a[4]),
                                     Integer.parseInt(a[5]),
                                     Integer.parseInt(a[6]),
-                                    Integer.parseInt(a[7])
+                                    0
                             )
                     );
                 }catch(NullPointerException ignored){}
