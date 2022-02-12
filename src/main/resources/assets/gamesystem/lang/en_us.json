@@ -26,5 +26,6 @@
   "item.gamesystem.motion_dice": "Motion Dice",
   "item.gamesystem.skill_dice": "Skill Dice",
   "item.gamesystem.converse_dice": "Converse Dice",
-  "item.gamesystem.bullet": "Bullet"
+  "item.gamesystem.bullet": "Bullet",
+  "item.gamesystem.gun": "Gun"
 }

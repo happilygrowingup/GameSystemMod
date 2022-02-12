@@ -1,5 +1,6 @@
 package com.growuphappily.gamesystem.system;
 
+import com.growuphappily.gamesystem.enums.EnumFactionCategory;
 import com.growuphappily.gamesystem.world.item.ItemRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,10 +19,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Mod.EventBusSubscriber
 public class DiceLogic {
@@ -144,6 +142,11 @@ public class DiceLogic {
                             } else {
                                 player.sendMessage("The distance to evil is  " + Objects.requireNonNull(Game.getGameByPlayerName(player.playerInstance.getDisplayName().getString())).evil.playerInstance.position().distanceTo(player.playerInstance.position()));
                                 Objects.requireNonNull(Game.getGameByPlayerName(player.playerInstance.getDisplayName().getString())).evil.playerInstance.removeEffect(MobEffects.INVISIBILITY);
+                            }
+                        }
+                        if(player.factions.contains(EnumFactionCategory.GUN)){
+                            if(new Random().nextInt(10) < 3){
+                                event.getItemStack().grow(1);
                             }
                         }
                         event.getItemStack().shrink(1);

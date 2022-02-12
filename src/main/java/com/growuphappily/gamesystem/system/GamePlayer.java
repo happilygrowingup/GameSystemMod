@@ -38,7 +38,7 @@ public class GamePlayer {
     public boolean isSuperRegened = false;
     public boolean canSuperRegen = false;
     public boolean isLocked;
-    public ArrayList<EnumFactionCategory> factions;
+    public ArrayList<EnumFactionCategory> factions = new ArrayList<>();
     public GamePlayer(ServerPlayer playerInstance){
         this.playerInstance = playerInstance;
     }

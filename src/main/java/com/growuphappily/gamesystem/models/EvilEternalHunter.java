@@ -40,7 +40,7 @@ public class EvilEternalHunter extends GamePlayer {
 
     public EvilEternalHunter(ServerPlayer playerInstance) {
         super(playerInstance);
-        attributes = new Attributes(30, 260, 90, 30, 100, 50, 80, 0);
+        attributes = new Attributes(30, 482, 110, 50, 60, 70, 80, 0);
         attributes.maxtire = 200;
     }
 

@@ -13,7 +13,7 @@ public class EffectBrokenArmor {
     public static final int ID = 0;
     public static final String message = "Broken Armor";
     public static ArrayList<GamePlayer> affectedPlayers = new ArrayList<>();
-    public void addPlayer(GamePlayer player, int time){
+    public static void addPlayer(GamePlayer player, int time){
         Timer timer = new Timer();
         int lastDefence = player.attributes.defence;
         affectedPlayers.add(player);

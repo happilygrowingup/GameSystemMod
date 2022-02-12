@@ -14,7 +14,7 @@ import java.util.*;
 
 @Mod.EventBusSubscriber
 public class SkillBarrage extends Skill{
-    public static ArrayList<GamePlayer> openedPlayers;
+    public static ArrayList<GamePlayer> openedPlayers = new ArrayList<>();
     public static long lastTime = 0;
 
     public SkillBarrage(){
@@ -23,18 +23,21 @@ public class SkillBarrage extends Skill{
     }
 
     public void run(GamePlayer player){
+        if(super.preRun(player)){
+            return;
+        }
         openedPlayers.add(player);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 openedPlayers.remove(player);
             }
-        }, 3000);
+        }, 1000);
     }
 
     @SubscribeEvent
     public static void tick(TickEvent.ServerTickEvent event){
-        if(lastTime + (long)400 >= new Date().getTime()){
+        if(lastTime + (long)250 <= new Date().getTime()){
             for (int i = 0; i < openedPlayers.size(); i++) {
                 GamePlayer player;
                 try {
@@ -45,14 +48,19 @@ public class SkillBarrage extends Skill{
                 }
                 try {
                     if (Objects.requireNonNull(Game.getGameByPlayerName(player.playerInstance.getDisplayName().getString())).isStarted) {
-                        for (int j = 0; j < 20; j++) {
+                        for (int j = 0; j < 16; j++) {
                             EntityShooter shooter = new EntityShooter(EntityTypeRegistry.shooter.get(), player.playerInstance.level);
-                            shooter.setDeltaMovement(player.playerInstance.getLookAngle().add(getPVec(player.playerInstance.getLookAngle()).scale((j - 10)*0.5)));
+                            shooter.setDeltaMovement(player.playerInstance.getLookAngle().add(getPVec(player.playerInstance.getLookAngle()).scale((j - 8)*0.05)));
                             player.playerInstance.level.addFreshEntity(shooter);
-                            shooter.moveTo(player.playerInstance.getEyePosition().add(player.playerInstance.getLookAngle()));
+                            shooter.moveTo(player.playerInstance.getEyePosition());
+                            shooter.setOwner(player.playerInstance);
+                            shooter.isSkill = true;
+                            //player.playerInstance.setDeltaMovement(player.playerInstance.getDeltaMovement().add(player.playerInstance.getLookAngle().scale(-1)));
                         }
                     }
-                }catch (NullPointerException ignored){}
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
             }
             lastTime = new Date().getTime();
         }

@@ -399,12 +399,7 @@ public class Game {
         stage = null;
         rule = null;
         Game game = this;
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Game.instances.remove(game);
-            }
-        }, 1000);
+        instances.remove(this);
     }
 
     public void addRule(int ID) {
@@ -452,7 +447,7 @@ public class Game {
         for (int i = 0; i < Game.instances.size(); i++) {
             Game game = Game.instances.get(i);
             if (!game.isStarted && event.getEntity() instanceof ServerPlayer player) {
-                if (player == game.evil.playerInstance && event.getPlacedBlock().getBlock() instanceof BlockSurgicalPoint) {
+                if (player == game.evil.playerInstance && event.getPlacedBlock().getBlock() instanceof BlockSurgicalPoint && game.points.size() < 4) {
                     game.points.add(event.getPos());
                 }
             }
