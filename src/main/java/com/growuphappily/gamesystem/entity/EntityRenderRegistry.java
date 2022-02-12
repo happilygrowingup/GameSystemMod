@@ -12,9 +12,11 @@ public class EntityRenderRegistry {
     @SubscribeEvent
     public static void onRenderersRegister(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(EntityTypeRegistry.shooter.get(), ShooterRender::new);
+        event.registerEntityRenderer(EntityTypeRegistry.moonGas.get(), MoonGasRender::new);
     }
     @SubscribeEvent
     public static void onyerRegister(EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(ModelShooter.LAYER_LOCATION, ModelShooter::createBodyLayer);
+        event.registerLayerDefinition(ModelMoonGas.LAYER_LOCATION, ModelMoonGas::createBodyLayer);
     }
 }

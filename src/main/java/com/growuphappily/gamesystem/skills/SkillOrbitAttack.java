@@ -26,6 +26,7 @@ public class SkillOrbitAttack extends Skill{
             return;
         }
         openedPlayers.add(player);
+        player.sendMessage("Your next attack will be strengthened.");
     }
 
     @SubscribeEvent
@@ -35,13 +36,19 @@ public class SkillOrbitAttack extends Skill{
             event.target.playerInstance.setDeltaMovement(
                     new Vec3(
                             event.player.playerInstance.getLookAngle().x,
-                            5.0,
+                            1.0,
                             event.player.playerInstance.getLookAngle().z
                     )
             );
             LogManager.getLogger().info(event.target.playerInstance.getDeltaMovement());
-            //if((double)Dice.onedX(100) + (double)event.player.attributes.speed*0.2 + event.player.attributes.knowledge*0.8 >=
-            //   ((double)Dice.onedX(100) + event.target.attributes.speed*0.6 + event.target.attributes.defence*0.4))
+            if((double)Dice.onedX(100) + (double)event.player.attributes.speed*0.2 + event.player.attributes.knowledge*0.8 >=
+               ((double)Dice.onedX(100) + event.target.attributes.speed*0.6 + event.target.attributes.defence*0.4)){
+                event.damage *= 1.5f;
+                event.player.sendMessage("Your next attack will be strengthened.");
+            }else{
+                event.damage *= 1.2f;
+                openedPlayers.remove(event.player);
+            }
         }
     }
 }

@@ -5,18 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Added multi-game support">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityMoonGas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/ModelMoonGas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/MoonGasRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageFaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemGun.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/gun.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity/moon_gas.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/annotations/EventSubscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/annotations/EventSubscribe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/AttackEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/AttackEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/AttackSucceedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/AttackSucceedEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/eventsystem/EventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/PackageAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/Skill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityRenderRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityRenderRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityTypeRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityTypeRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/enums/EnumFactionCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/enums/EnumFactionCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/gui/GUISelectSkill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/Networking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/packages/Networking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBarrage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBarrage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillMoonAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillMoonAttack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillOrbitAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/DiceLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/DiceLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/bullet.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item/bullet.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemBlankDice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemRegistry.java" afterDir="false" />
     </list>
     <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,14 +165,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/gui" />
-      <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/entity" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/models/item" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/block" />
     </key>
@@ -454,7 +463,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java</url>
-          <line>160</line>
+          <line>167</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
@@ -466,6 +475,7 @@
         <watch expression="new Date().getTime()" language="JAVA" custom="java.util.Date" />
         <watch expression="player.lastHurt + player.attributes.getRestTime()" language="JAVA" />
         <watch expression="player.lastHurt + (long)player.attributes.getRestTime()" language="JAVA" />
+        <watch expression="entityMoonGas.Yrot" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

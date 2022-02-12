@@ -3,6 +3,7 @@ package com.growuphappily.gamesystem.system;
 
 import com.growuphappily.gamesystem.enums.EnumAttackResult;
 import com.growuphappily.gamesystem.enums.EnumCastResult;
+import com.growuphappily.gamesystem.enums.EnumFactionCategory;
 import com.growuphappily.gamesystem.enums.EnumPlayerState;
 import com.growuphappily.gamesystem.eventsystem.AttackEvent;
 import com.growuphappily.gamesystem.eventsystem.AttackSucceedEvent;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 @Mod.EventBusSubscriber
@@ -36,7 +38,7 @@ public class GamePlayer {
     public boolean isSuperRegened = false;
     public boolean canSuperRegen = false;
     public boolean isLocked;
-
+    public ArrayList<EnumFactionCategory> factions;
     public GamePlayer(ServerPlayer playerInstance){
         this.playerInstance = playerInstance;
     }
@@ -47,15 +49,15 @@ public class GamePlayer {
         }
         if((Dice.onedX(100) + this.attributes.speed*0.2) >= (20 + beingAttacked.attributes.speed*0.4)){
             beingAttacked.lastHurt = new Date().getTime();
-            if(Dice.onedX(100) >= (Dice.onedX(100) + beingAttacked.attributes.defence - (attributes.strength * 0.1))){
+            if(Dice.onedX(100) >= (Dice.onedX(100) + beingAttacked.attributes.defence - (attributes.strength * 0.1) - (factions.contains(EnumFactionCategory.FENCING) ? Arrays.stream(Dice.NdX(2,6)).sum() : 0))){
                 AttackSucceedEvent event = new AttackSucceedEvent(this, beingAttacked, (float) ((attributes.strength*0.15) + 5 - (beingAttacked.attributes.defence * 0.1)));
                 if(MinecraftForge.EVENT_BUS.post(event)){return EnumAttackResult.CRITICAL;}
-                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage);
+                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage + (factions.contains(EnumFactionCategory.FENCING) ? 3 : 0));
                 return EnumAttackResult.CRITICAL;
             }else {
                 AttackSucceedEvent event = new AttackSucceedEvent(this, beingAttacked, (float) ((attributes.strength*0.1) + 5 - (beingAttacked.attributes.defence * 0.1)));
                 if(MinecraftForge.EVENT_BUS.post(event)){return EnumAttackResult.NORMAL;}
-                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage);
+                beingAttacked.hurt(DamageSource.playerAttack(playerInstance), event.damage + (factions.contains(EnumFactionCategory.FENCING) ? 3 : 0));
                 return EnumAttackResult.NORMAL;
             }
         }else{

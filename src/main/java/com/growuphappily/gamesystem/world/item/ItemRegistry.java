@@ -16,4 +16,5 @@ public class ItemRegistry {
     public static RegistryObject<Item> skillDice = ITEMS.register("skill_dice", ItemSkillDice::new);
     public static RegistryObject<Item> converseDice = ITEMS.register("converse_dice", ItemConverseDice::new);
     public static RegistryObject<Item> bullet = ITEMS.register("bullet", ItemBullet::new);
+    public static RegistryObject<Item> gun = ITEMS.register("gun", ItemGun::new);
 }

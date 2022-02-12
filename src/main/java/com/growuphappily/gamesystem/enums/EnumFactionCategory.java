@@ -1,6 +1,8 @@
 package com.growuphappily.gamesystem.enums;
 
-public enum EnumFactionCategory {
+import java.io.Serializable;
+
+public enum EnumFactionCategory implements Serializable {
     FENCING,
     GUN,
     SHADOW,

@@ -33,11 +33,7 @@ public class DiceLogic {
         if(event.getWorld().isClientSide){
             return;
         }
-        LogManager.getLogger().info("click");
-        LogManager.getLogger().info(lastTime);
-        LogManager.getLogger().info(new Date().getTime());
         if(new Date().getTime() - lastTime > (long)100) {
-            LogManager.getLogger().info("call");
             for (Game game : Game.instances) {
                 if (Game.getGameByPlayerName(event.getPlayer().getDisplayName().getString()) == game && game.isStarted) {
                     GamePlayer player = game.searchPlayerByName(event.getPlayer().getDisplayName().getString());
@@ -69,6 +65,7 @@ public class DiceLogic {
                             player.sendMessage("You have gotten invisibility for " + r + " second(s)!");
                             event.getItemStack().shrink(1);
                         }
+                        event.setCanceled(true);
                     }
                     if (event.getItemStack().is(ItemRegistry.blankDice.get()) || event.getItemStack().is(ItemRegistry.skillDice.get())) {
                         for (ItemStack stack : player.playerInstance.getInventory().items) {
@@ -150,6 +147,7 @@ public class DiceLogic {
                             }
                         }
                         event.getItemStack().shrink(1);
+                        event.setCanceled(true);
                     }
                 }
             }

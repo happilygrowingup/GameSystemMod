@@ -69,5 +69,12 @@ public class Networking {
                 PackageSkills::new,
                 PackageSkills::handler
         );
+        INSTANCE.registerMessage(
+                ID(),
+                PackageFaction.class,
+                PackageFaction::toBytes,
+                PackageFaction::new,
+                PackageFaction::handler
+        );
     }
 }

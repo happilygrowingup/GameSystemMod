@@ -1,5 +1,8 @@
 package com.growuphappily.gamesystem.gui;
 
+import com.growuphappily.gamesystem.enums.EnumFactionCategory;
+import com.growuphappily.gamesystem.packages.Networking;
+import com.growuphappily.gamesystem.packages.PackageFaction;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -74,6 +77,12 @@ public class GUISelectSkill extends Screen {
 
     public void endSelecting(){
         HUDSelectSkill.skills = selectedSkills;
+        if(selectedSkills.contains("com.growuphappily.gamesystem.skills.SkillOrbitAttack") || selectedSkills.contains("com.growuphappily.gamesystem.skills.SkillMoonAttack")){
+            Networking.INSTANCE.sendToServer(new PackageFaction(EnumFactionCategory.FENCING));
+        }
+        if(selectedSkills.contains("com.growuphappily.gamesystem.skills.SkillBarrage") || selectedSkills.contains("com.growuphappily.gamesystem.skills.SkillBlast")){
+            Networking.INSTANCE.sendToServer(new PackageFaction(EnumFactionCategory.GUN));
+        }
         Minecraft.getInstance().setScreen(null);
     }
 }

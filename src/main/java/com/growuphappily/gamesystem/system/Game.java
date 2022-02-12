@@ -1,10 +1,7 @@
 package com.growuphappily.gamesystem.system;
 
 import com.growuphappily.gamesystem.effects.*;
-import com.growuphappily.gamesystem.enums.EnumGameMode;
-import com.growuphappily.gamesystem.enums.EnumGameStage;
-import com.growuphappily.gamesystem.enums.EnumPlayerState;
-import com.growuphappily.gamesystem.enums.EnumRules;
+import com.growuphappily.gamesystem.enums.*;
 import com.growuphappily.gamesystem.packages.Networking;
 import com.growuphappily.gamesystem.packages.PackageAttribute;
 import com.growuphappily.gamesystem.packages.PackageGameStart;
@@ -21,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
@@ -120,6 +118,15 @@ public class Game {
         stage = EnumGameStage.STAGE_ONE;
         for (GamePlayer player : humans) {
             player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.blankDice.get(), 3));
+            if(player.factions.contains(EnumFactionCategory.FENCING)){
+                player.attributes.speed += 10;
+                player.attributes.defence += 8;
+                player.playerInstance.getInventory().add(new ItemStack(Items.DIAMOND_SWORD));
+            }
+            if(player.factions.contains(EnumFactionCategory.GUN)){
+                player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.gun.get()));
+                player.playerInstance.getInventory().add(new ItemStack(ItemRegistry.bullet.get(), 10));
+            }
         }
         evil.playerInstance.getInventory().add(new ItemStack(ItemRegistry.blankDice.get(), 5));
         for(GamePlayer player : players){
