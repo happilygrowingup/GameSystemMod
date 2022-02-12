@@ -132,6 +132,9 @@ public class EntityShooter extends AbstractHurtingProjectile {
                         }catch (NullPointerException e){
                             continue;
                         }
+                        if(target.playerInstance == getOwner()){
+                            continue;
+                        }
                         if((float)Dice.onedX(100) >= 20f + target.attributes.defence*0.5f){
                             target.hurt(DamageSource.playerAttack((Player)getOwner()), 15f + player.attributes.knowledge*0.1f + player.attributes.strength*0.1f - target.attributes.defence*0.6f);
                         }else{

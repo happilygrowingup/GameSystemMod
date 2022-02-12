@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Added factions skills&#10;Added gun">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/textures/item/gun_texture.png" afterDir="false" />
+    <list default="true" id="193e2efc-cbc1-421e-986e-2ef239094407" name="Changes" comment="Added skills&#10;fixed bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/effects/EffectBrokenArmor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/entity/EntityShooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/models/EvilEternalHunter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/models/EvilEternalHunter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBarrage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBarrage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBlast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/skills/SkillBlast.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/DiceLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/DiceLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/system/GamePlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemGun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/growuphappily/gamesystem/world/item/ItemGun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gamesystem/lang/en_us.json" afterDir="false" />
     </list>
     <list id="0d1bb38b-a7f7-4a0a-800f-9e4665f71768" name="Changes by Katrina" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -423,7 +414,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644633265775</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added skills&#10;fixed bugs">
+      <created>1644670569090</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1644670569091</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -454,7 +452,8 @@
     <MESSAGE value="Added pressure bar for evil&#10;Added shooter entity&#10;Fix bugs" />
     <MESSAGE value="Added multi-game support" />
     <MESSAGE value="Added factions skills&#10;Added gun" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added factions skills&#10;Added gun" />
+    <MESSAGE value="Added skills&#10;fixed bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added skills&#10;fixed bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

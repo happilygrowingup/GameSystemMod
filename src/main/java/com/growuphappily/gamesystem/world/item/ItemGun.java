@@ -41,6 +41,7 @@ public class ItemGun extends Item {
             try {
                 if (SkillBlast.openedPlayers.contains(Objects.requireNonNull(Game.getGameByPlayerName(player.getDisplayName().getString())).searchPlayerByName(player.getDisplayName().getString()))){
                     shooter.isBlast = true;
+                    SkillBlast.openedPlayers.remove(Objects.requireNonNull(Game.getGameByPlayerName(player.getDisplayName().getString())).searchPlayerByName(player.getDisplayName().getString()));
                 }
             }catch (NullPointerException ignored){}
             for (ItemStack stack : player.getInventory().items) {
